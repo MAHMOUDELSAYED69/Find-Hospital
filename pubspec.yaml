@@ -29,20 +29,15 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cupertino_icons: ^1.0.6
-  # for http request
   dio: ^5.4.3+1
-  # env file
   dotenv: ^4.2.0
-  # drop down button Widget
   dropdown_button2: ^2.3.9
   flutter:
     sdk: flutter
-  # state management
   flutter_hooks: ^0.20.5
   flutter_riverpod: ^2.5.1
-  # get location
   geolocator: ^11.0.0
-  # session token
+  lottie: ^3.1.0
   uuid: ^4.4.0
 
 dev_dependencies:
