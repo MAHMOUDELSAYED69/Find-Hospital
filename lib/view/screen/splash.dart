@@ -1,7 +1,6 @@
 import 'package:find_hospital/core/constant/animation.dart';
 import 'package:find_hospital/core/constant/color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,12 +14,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    //  goToNextScreen();
+     goToNextScreen();
   }
 
   Future<void> goToNextScreen() async =>
       Future.delayed(const Duration(seconds: 2), () {
-        Navigator.pushReplacementNamed(context, '/home');
+        Navigator.pushReplacementNamed(context, '/findHospital');
       });
 
   @override
