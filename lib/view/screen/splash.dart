@@ -1,6 +1,7 @@
 import 'package:find_hospital/core/constant/animation.dart';
 import 'package:find_hospital/core/constant/color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // goToNextScreen();
+    //  goToNextScreen();
   }
 
   Future<void> goToNextScreen() async =>
@@ -25,15 +26,43 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        const Spacer(
-          flex: 6,
-        ),
-        Text('Find Hospital', style: Theme.of(context).textTheme.titleLarge),
-        const Spacer(flex: 5),
-        Lottie.asset(LottieManager.loading),
-      ],
+        body: SizedBox(
+      width: double.infinity,
+      height: double.infinity,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Positioned(bottom: 50, child: Lottie.asset(LottieManager.location)),
+          _buildTitleAndIcon(),
+        ],
+      ),
     ));
+  }
+
+  Widget _buildTitleAndIcon() {
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'Find',
+          style: TextStyle(
+            fontSize: 32,
+            fontWeight: FontWeight.w600,
+            fontStyle: FontStyle.italic,
+          ),
+        ),
+        Text(
+          ' Hospital',
+          style: TextStyle(
+            color: ColorManager.red,
+            fontSize: 32,
+            fontWeight: FontWeight.w600,
+            fontStyle: FontStyle.italic,
+          ),
+        ),
+        SizedBox(width: 10),
+        Icon(Icons.healing, color: ColorManager.red, size: 32),
+      ],
+    );
   }
 }
