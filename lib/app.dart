@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'view/screen/find_hospital_screen.dart';
+import 'view/screen/hospital_details.dart';
 import 'view/screen/splash.dart';
 
 class MyApp extends StatelessWidget {
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (context) => const SplashScreen(),
         "/findHospital": (context) => const FindHospitalScreen(),
+        "/hospitalDetails": (context) => const HospitalDetailScreen(),
       },
     );
   }
