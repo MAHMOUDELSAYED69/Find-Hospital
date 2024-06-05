@@ -1,5 +1,6 @@
 import 'package:find_hospital/core/constant/animation.dart';
 import 'package:find_hospital/core/constant/color.dart';
+import 'package:find_hospital/core/constant/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -14,12 +15,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-     goToNextScreen();
+    goToNextScreen();
   }
 
   Future<void> goToNextScreen() async =>
       Future.delayed(const Duration(seconds: 4), () {
-        Navigator.pushReplacementNamed(context, '/findHospital');
+        Navigator.pushReplacementNamed(context, RouteManager.home);
       });
 
   @override
