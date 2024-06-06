@@ -26,7 +26,7 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(height: 20), 
+          const SizedBox(height: 20),
           CustomButton(title: "Get Nearest Hospital", onPressed: () {}),
           const SizedBox(height: 20),
         ],
