@@ -3,12 +3,14 @@ import 'package:dio/dio.dart';
 import 'package:find_hospital/core/constant/api_url.dart';
 import 'package:uuid/uuid.dart';
 
+import '../models/hospital_model.dart';
+
 class FindHospitalWebService {
   static Dio dio = Dio();
 
-  static Future<List<dynamic>> getNearestHospital(
+  static Future<List<PlaceInfo>> getNearestHospital(
       double latitude, double longitude, double? radius) async {
-    List<dynamic> allResults = [];
+    List<PlaceInfo> allResults = [];
     String? nextPageToken;
     num totalResults = 0;
 
@@ -16,7 +18,7 @@ class FindHospitalWebService {
       String sessionToken = const Uuid().v4();
       final queryParameters = {
         'location': '$latitude,$longitude',
-        'radius': radius ?? '5000',
+        'radius': radius?.toString() ?? '5000',
         'type': 'hospital',
         'key': ApiUrlManager.googleMap,
         'sessiontoken': sessionToken,
@@ -25,17 +27,19 @@ class FindHospitalWebService {
 
       try {
         final response = await dio.get(
-            ApiUrlManager.nearestHospital,
-            queryParameters: queryParameters);
-            log("Fetching DATA.....");
-        List data = response.data['results'];
+          ApiUrlManager.nearestHospital,
+          queryParameters: queryParameters,
+        );
+        log("Fetching DATA.....");
+        List<dynamic> data = response.data['results'];
         log(data.toString());
-        allResults.addAll(data);
+        for (var item in data) {
+          allResults.add(PlaceInfo.fromJson(item));
+        }
+
         nextPageToken = response.data['next_page_token'];
         totalResults += data.length;
-        for (var i = 0; i < data.length; i++) {
-          log(data[i]['name']);
-        }
+
         if (nextPageToken != null) {
           await Future.delayed(const Duration(seconds: 2));
         }
@@ -44,6 +48,7 @@ class FindHospitalWebService {
         break;
       }
     } while (nextPageToken != null && totalResults < 60);
+
     log(allResults.toString());
     return allResults;
   }
