@@ -32,34 +32,32 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
           const SizedBox(height: 20),
         ],
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(height: 10),
-              Card(
-                child: ListTile(
-                  onTap: () {
-                    Navigator.pushNamed(context, RouteManager.details);
-                  },
-                  title: const Text("Hospital Title"),
-                  subtitle: const Text("Hospital Address"),
-                  trailing: const Icon(Icons.chevron_right),
-                  leading: const Icon(Icons.healing),
-                ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 10),
+            Card(
+              child: ListTile(
+                onTap: () {
+                  Navigator.pushNamed(context, RouteManager.details);
+                },
+                title: const Text("Hospital Title"),
+                subtitle: const Text("Hospital Address"),
+                trailing: const Icon(Icons.chevron_right),
+                leading: const Icon(Icons.healing),
               ),
-              Card(
-                child: ListTile(
-                  onTap: () {},
-                  title: const Text("Hospital Title"),
-                  subtitle: const Text("Hospital Address"),
-                  trailing: const Icon(Icons.chevron_right),
-                  leading: const Icon(Icons.healing),
-                ),
+            ),
+            Card(
+              child: ListTile(
+                onTap: () {},
+                title: const Text("Hospital Title"),
+                subtitle: const Text("Hospital Address"),
+                trailing: const Icon(Icons.chevron_right),
+                leading: const Icon(Icons.healing),
               ),
-           
-            ],
-          ),
+            ),
+         
+          ],
         ),
       ),
     );
