@@ -1,17 +1,17 @@
 import 'dart:developer';
 
+import 'package:find_hospital/core/helper/scaffold_snackbar.dart';
 import 'package:geolocator/geolocator.dart';
 
 class LocationHelper {
-  static Future<Position> determineCurrentPosition() async {
+  static Future<Position> determineCurrentPosition(context) async {
     bool serviceEnabled;
     LocationPermission permission;
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       log('Location services are disabled.');
-
-      // return Future.error('Location services are disabled.');
+      customSnackBar(context, "Location services are disabled.");
     }
 
     permission = await Geolocator.checkPermission();
@@ -19,18 +19,14 @@ class LocationHelper {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         log('Location permissions are denied.');
-
-        // return Future.error('Location permissions are denied.');
+      customSnackBar(context, "Location permissions are denied.");
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
       log('Location permissions are permanently denied.');
-      // You can handle this case further (e.g., show a message to the user).
-      // return Future.error('Location permissions are permanently denied.');
+          customSnackBar(context, "Location permissions are permanently denied.");
     }
-
-    // When we reach here, permissions are granted, and we can continue accessing the position.
     return await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high,
     );
