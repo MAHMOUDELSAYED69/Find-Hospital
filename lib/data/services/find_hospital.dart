@@ -27,7 +27,9 @@ class FindHospitalWebService {
         final response = await dio.get(
             ApiUrlManager.nearestHospital,
             queryParameters: queryParameters);
+            log("Fetching DATA.....");
         List data = response.data['results'];
+        log(data.toString());
         allResults.addAll(data);
         nextPageToken = response.data['next_page_token'];
         totalResults += data.length;
@@ -42,7 +44,7 @@ class FindHospitalWebService {
         break;
       }
     } while (nextPageToken != null && totalResults < 60);
-
+    log(allResults.toString());
     return allResults;
   }
 }

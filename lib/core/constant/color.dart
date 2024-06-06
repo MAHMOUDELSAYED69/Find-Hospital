@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' show Color, Colors;
+import 'package:flutter/material.dart' show Color;
 
 abstract class ColorManager {
   const ColorManager._();
