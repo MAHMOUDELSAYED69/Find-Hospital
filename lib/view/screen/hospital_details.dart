@@ -1,18 +1,13 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import '../../core/constant/color.dart';
 import '../../data/models/hospital_model.dart';
 
 class HospitalDetailScreen extends StatelessWidget {
-  const HospitalDetailScreen({super.key});
+  const HospitalDetailScreen({super.key, this.hospital});
+  final PlaceInfo? hospital;
 
   @override
   Widget build(BuildContext context) {
-    final PlaceInfo? hospital =
-        ModalRoute.of(context)!.settings.arguments as PlaceInfo?;
-            log('Hospital arguments: ${hospital?.name}');
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("Hospital Info"),
