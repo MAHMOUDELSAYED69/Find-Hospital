@@ -11,7 +11,7 @@ class FindHospitalWebService {
     final String sessionToken = const Uuid().v4();
     List<Map<String, dynamic>> hospitals = [];
     String? nextPageToken;
-
+    
     do {
       try {
         final response = await dio.get(
@@ -37,8 +37,7 @@ class FindHospitalWebService {
             .toList());
 
         nextPageToken = response.data['next_page_token'];
-        await Future.delayed(const Duration(
-            seconds: 2)); 
+        await Future.delayed(const Duration(seconds: 2));
       } catch (err) {
         log('Error: $err');
         return hospitals;

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:find_hospital/bloc/hospital/find_hospital_cubit.dart';
 import 'package:find_hospital/core/constant/color.dart';
 import 'package:find_hospital/core/constant/routes.dart';
@@ -45,7 +47,7 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
               title: "Get Nearest Hospital",
               onPressed: () {
                 cubit.getCurrentLocation(context);
-                cubit.getNearestHospitals();
+                cubit.getNearestHospitals(radius: 500);
               }),
           const SizedBox(height: 20),
         ],
@@ -78,7 +80,9 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                     return Card(
                       child: ListTile(
                         onTap: () {
-                          Navigator.pushNamed(context, RouteManager.details);
+                          final PlaceInfo? placeInfo = _hospitalList[index];
+                          Navigator.pushNamed(context, RouteManager.details,
+                              arguments: placeInfo);
                         },
                         title: Text(_hospitalList[index]?.name ?? ""),
                         subtitle:
