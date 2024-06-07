@@ -2,10 +2,12 @@
     <application
         android:label="find_hospital"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
-        <meta-data
+        android:icon="@mipmap/ic_launcher"
+        android:enableOnBackInvokedCallback="true"
+        >
+        <!-- <meta-data
             android:name="android.enableOnBackInvokedCallback"
-            android:value="true" />
+            android:value="true" /> -->
         <meta-data
             android:name="com.google.android.gms.applicationId"
             android:value="YOUR_GOOGLE_APP_ID" />

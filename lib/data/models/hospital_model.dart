@@ -48,44 +48,45 @@ class PlaceInfo {
   });
 
   factory PlaceInfo.fromJson(Map<String, dynamic> json) {
-    var geometry = json['geometry'];
-    var location = geometry['location'];
-    var viewport = geometry['viewport'];
-    var northeast = viewport['northeast'];
-    var southwest = viewport['southwest'];
-    var openingHours = json['opening_hours'];
+    var geometry = json['geometry'] ?? {};
+    var location = geometry['location'] ?? {};
+    var viewport = geometry['viewport'] ?? {};
+    var northeast = viewport['northeast'] ?? {};
+    var southwest = viewport['southwest'] ?? {};
+    var openingHours = json['opening_hours'] ?? {};
     var photoList = json['photos'] as List? ?? [];
+    var plusCode = json['plus_code'] ?? {};
 
     return PlaceInfo(
       businessStatus: json['business_status'] ?? 'UNKNOWN',
-      lat: location['lat'],
-      lng: location['lng'],
-      northeastLat: northeast['lat'],
-      northeastLng: northeast['lng'],
-      southwestLat: southwest['lat'],
-      southwestLng: southwest['lng'],
-      icon: json['icon'],
-      iconBackgroundColor: json['icon_background_color'],
-      iconMaskBaseUri: json['icon_mask_base_uri'],
-      name: json['name'],
-      placeId: json['place_id'],
-      compoundCode: json['plus_code']['compound_code'],
-      globalCode: json['plus_code']['global_code'],
-      reference: json['reference'],
-      scope: json['scope'],
-      types: List<String>.from(json['types']),
-      vicinity: json['vicinity'],
-      openNow: openingHours != null ? openingHours['open_now'] : false,
+      lat: location['lat'] ?? 0.0,
+      lng: location['lng'] ?? 0.0,
+      northeastLat: northeast['lat'] ?? 0.0,
+      northeastLng: northeast['lng'] ?? 0.0,
+      southwestLat: southwest['lat'] ?? 0.0,
+      southwestLng: southwest['lng'] ?? 0.0,
+      icon: json['icon'] ?? '',
+      iconBackgroundColor: json['icon_background_color'] ?? '',
+      iconMaskBaseUri: json['icon_mask_base_uri'] ?? '',
+      name: json['name'] ?? '',
+      placeId: json['place_id'] ?? '',
+      compoundCode: plusCode['compound_code'] ?? '',
+      globalCode: plusCode['global_code'] ?? '',
+      reference: json['reference'] ?? '',
+      scope: json['scope'] ?? '',
+      types: List<String>.from(json['types'] ?? []),
+      vicinity: json['vicinity'] ?? '',
+      openNow: openingHours['open_now'] ?? false,
       photos: photoList
           .map((photo) => {
-                'height': photo['height'],
+                'height': photo['height'] ?? 0,
                 'html_attributions':
-                    List<String>.from(photo['html_attributions']),
-                'photo_reference': photo['photo_reference'],
-                'width': photo['width'],
+                    List<String>.from(photo['html_attributions'] ?? []),
+                'photo_reference': photo['photo_reference'] ?? '',
+                'width': photo['width'] ?? 0,
               })
           .toList(),
-      rating: json['rating']?.toDouble() ?? 0.0,
+      rating: (json['rating'] ?? 0.0).toDouble(),
       userRatingsTotal: json['user_ratings_total'] ?? 0,
     );
   }
