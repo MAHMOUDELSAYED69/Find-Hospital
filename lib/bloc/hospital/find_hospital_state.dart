@@ -17,3 +17,12 @@ class FindHospitalFailure extends FindHospitalState {
   final String message;
   FindHospitalFailure({required this.message});
 }
+
+class OpenMapsLoading extends FindHospitalState {}
+
+class OpenMapsSuccess extends FindHospitalState {}
+
+class OpenMapsFailure extends FindHospitalState {
+  final String message;
+  OpenMapsFailure({required this.message});
+}

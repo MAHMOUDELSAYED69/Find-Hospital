@@ -1,9 +1,12 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:find_hospital/core/helper/location.dart';
 import 'package:find_hospital/data/models/hospital_model.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:meta/meta.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../data/services/find_hospital.dart';
 
 part 'find_hospital_state.dart';
@@ -15,6 +18,22 @@ class FindHospitalCubit extends Cubit<FindHospitalState> {
   Future<void> getCurrentLocation(context) async {
     while (location == null) {
       location = await LocationHelper.determineCurrentPosition(context);
+    }
+  }
+
+  void openMaps({required double? lat, required double? lng}) async {
+    if (lat != null && lng != null) {
+      emit(OpenMapsLoading());
+      final url = 'https://www.google.com/maps/search/?api=1&query=$lat,$lng';
+      if (await canLaunch(url)) {
+        await launch(url);
+        emit(OpenMapsSuccess());
+      } else {
+        log('Could not launch $url');
+        emit(OpenMapsFailure(message: "Hospital location is not available"));
+      }
+    } else {
+      log('Hospital location is not available');
     }
   }
 
