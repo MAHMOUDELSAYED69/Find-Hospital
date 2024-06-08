@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:find_hospital/bloc/hospital/find_hospital_cubit.dart';
 import 'package:find_hospital/core/helper/scaffold_snackbar.dart';
 import 'package:find_hospital/view/widget/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/constant/color.dart';
 import '../../data/models/hospital_model.dart';
@@ -66,29 +69,53 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
         padding: const EdgeInsets.all(16),
         child: Row(
           children: [
-            const Icon(Icons.favorite_border),
-            const SizedBox(width: 15),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            const Column(
               children: [
-                Text(widget.hospital?.name ?? ""),
-                Text(widget.hospital?.compoundCode ?? ""),
+                Icon(Icons.favorite_border),
+                Icon(
+                  Icons.h_mobiledata,
+                  size: 35,
+                  color: ColorManager.red,
+                )
               ],
             ),
-            const Spacer(),
-            Column(
-              children: [
-                const Text("Rating"),
-                Text(
-                  widget.hospital?.rating.toString() ?? "",
-                  style: const TextStyle(
-                      color: ColorManager.red, fontWeight: FontWeight.bold),
-                ),
-              ],
+            const SizedBox(width: 15),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('${widget.hospital?.name}'),
+                  Text(isHospitalOpen()),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Column(
+                children: [
+                  const Text("Rating"),
+                  Text(
+                    widget.hospital?.rating.toString() ?? "",
+                    style: const TextStyle(
+                        color: ColorManager.red, fontWeight: FontWeight.bold),
+                  ),
+                  const Text("Users Ratings Total"),
+                  Text(
+                    '${widget.hospital?.userRatingsTotal} Users',
+                    style: const TextStyle(
+                        color: ColorManager.red, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  String isHospitalOpen() {
+    return widget.hospital?.openNow == true
+        ? "Hospital Open Now!"
+        : "Hospital Open Close!";
   }
 }
