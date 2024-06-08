@@ -1,13 +1,24 @@
+import 'package:find_hospital/bloc/hospital/find_hospital_cubit.dart';
+import 'package:find_hospital/core/helper/scaffold_snackbar.dart';
+import 'package:find_hospital/view/widget/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/constant/color.dart';
 import '../../data/models/hospital_model.dart';
 
-class HospitalDetailScreen extends StatelessWidget {
+class HospitalDetailScreen extends StatefulWidget {
   const HospitalDetailScreen({super.key, this.hospital});
   final PlaceInfo? hospital;
 
   @override
+  State<HospitalDetailScreen> createState() => _HospitalDetailScreenState();
+}
+
+class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
+  bool _isloading = false;
+  @override
   Widget build(BuildContext context) {
+    final cubit = BlocProvider.of<FindHospitalCubit>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Hospital Info"),
@@ -18,6 +29,31 @@ class HospitalDetailScreen extends StatelessWidget {
         child: Column(
           children: [
             _buildHospitalInfoCard(),
+            BlocConsumer<FindHospitalCubit, FindHospitalState>(
+              listener: (context, state) {
+                if (state is OpenMapsLoading) {
+                  _isloading = true;
+                }
+                if (state is OpenMapsSuccess) {
+                  _isloading = false;
+                }
+                if (state is OpenMapsFailure) {
+                  _isloading = false;
+                  customSnackBar(context, state.message);
+                }
+              },
+              builder: (context, state) {
+                return CustomButton(
+                  iconData: Icons.map_sharp,
+                  title: "Open Maps",
+                  isLoading: _isloading,
+                  onPressed: () {
+                    cubit.openMaps(
+                        lat: widget.hospital?.lat, lng: widget.hospital?.lng);
+                  },
+                );
+              },
+            ),
           ],
         ),
       ),
@@ -35,8 +71,8 @@ class HospitalDetailScreen extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(hospital?.name ?? ""),
-                Text(hospital?.compoundCode ?? ""),
+                Text(widget.hospital?.name ?? ""),
+                Text(widget.hospital?.compoundCode ?? ""),
               ],
             ),
             const Spacer(),
@@ -44,7 +80,7 @@ class HospitalDetailScreen extends StatelessWidget {
               children: [
                 const Text("Rating"),
                 Text(
-                  hospital?.rating.toString() ?? "",
+                  widget.hospital?.rating.toString() ?? "",
                   style: const TextStyle(
                       color: ColorManager.red, fontWeight: FontWeight.bold),
                 ),

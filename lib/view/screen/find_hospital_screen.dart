@@ -42,6 +42,7 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
         children: [
           const SizedBox(height: 20),
           CustomButton(
+              isLoading: _isLoading,
               title: "Get Nearest Hospital",
               onPressed: () {
                 cubit.getCurrentLocation(context);

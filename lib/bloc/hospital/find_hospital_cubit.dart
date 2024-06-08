@@ -30,10 +30,11 @@ class FindHospitalCubit extends Cubit<FindHospitalState> {
         emit(OpenMapsSuccess());
       } else {
         log('Could not launch $url');
-        emit(OpenMapsFailure(message: "Hospital location is not available"));
+        emit(OpenMapsFailure(message: "Could not launch Google Maps"));
       }
     } else {
       log('Hospital location is not available');
+      emit(OpenMapsFailure(message: "Hospital location is not available"));
     }
   }
 
