@@ -3,14 +3,13 @@
         android:label="find_hospital"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:enableOnBackInvokedCallback="true"
-        >
-        <!-- <meta-data
-            android:name="android.enableOnBackInvokedCallback"
-            android:value="true" /> -->
+        android:enableOnBackInvokedCallback="true">
+        
+        <!-- Add your Google API key here -->
         <meta-data
             android:name="com.google.android.gms.applicationId"
             android:value="YOUR_GOOGLE_APP_ID" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -27,14 +26,18 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+    
+    <!-- Add required permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    
     <queries>
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT"/>

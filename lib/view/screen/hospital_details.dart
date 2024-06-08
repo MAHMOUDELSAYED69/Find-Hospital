@@ -17,29 +17,39 @@ class HospitalDetailScreen extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            Card(
-              child: ListTile(
-                title: Text(hospital?.name ?? ""),
-                subtitle: Text(hospital?.compoundCode ?? ""),
-                trailing: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      hospital?.rating.toString() ?? "",
-                    ),
-                    Text(hospital?.businessStatus ?? ""),
-                  ],
+            _buildHospitalInfoCard(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHospitalInfoCard() {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          children: [
+            const Icon(Icons.favorite_border),
+            const SizedBox(width: 15),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(hospital?.name ?? ""),
+                Text(hospital?.compoundCode ?? ""),
+              ],
+            ),
+            const Spacer(),
+            Column(
+              children: [
+                const Text("Rating"),
+                Text(
+                  hospital?.rating.toString() ?? "",
+                  style: const TextStyle(
+                      color: ColorManager.red, fontWeight: FontWeight.bold),
                 ),
-                leading: const Icon(Icons.favorite_border),
-              ),
-            )
-            //       Text("Hospital Title"),
-            //       Text("Hospital Address"),
-            //       Text("Hospital Rating"),
-            //       Text("Hospital Type"),
-            //       Text("Distance"),
-            //       Text("Time"),
-            //       Text("Favourite"),
+              ],
+            ),
           ],
         ),
       ),
