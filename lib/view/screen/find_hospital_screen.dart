@@ -8,6 +8,7 @@ import 'package:lottie/lottie.dart';
 import '../../core/constant/animation.dart';
 import '../../data/models/hospital_model.dart';
 import '../widget/custom_button.dart';
+import '../widget/custom_dropdown.dart';
 
 class FindHospitalScreen extends StatefulWidget {
   const FindHospitalScreen({super.key});
@@ -39,19 +40,29 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                 fontStyle: FontStyle.italic, fontWeight: FontWeight.w500),
           )),
       endDrawer: const Drawer(),
-      bottomNavigationBar: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const SizedBox(height: 20),
-          CustomButton(
-              isLoading: _isLoading,
-              title: "Get Nearest Hospital",
-              onPressed: () {
-                cubit.getCurrentLocation(context);
-                cubit.getNearestHospitals(radius: 500);
-              }),
-          const SizedBox(height: 20),
-        ],
+      bottomNavigationBar: Card(
+        elevation: 2,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(12),
+            topRight: Radius.circular(12),
+          ),
+        ),
+        color: ColorManager.red,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: 20),
+            CustomButton(
+                isLoading: _isLoading,
+                title: "Get Nearest Hospital",
+                onPressed: () {
+                  cubit.getCurrentLocation(context);
+                  cubit.getNearestHospitals(radius: selectedDoubleValue);
+                }),
+            const SizedBox(height: 20),
+          ],
+        ),
       ),
       body: BlocConsumer<FindHospitalCubit, FindHospitalState>(
         listener: (context, state) {
@@ -106,25 +117,36 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
 
   Widget _buildTotalHospital(int totalHospital) {
     return Card(
-        elevation: 5,
-        child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 22),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  "Total hospital Founded: ",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                ),
-                Text(
-                  totalHospital.toString(),
-                  style: const TextStyle(
+      elevation: 6,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 22),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              flex: 5,
+              child: Row(
+                children: [
+                  const Text(
+                    "Total hospital Founded: ",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  ),
+                  Text(
+                    totalHospital.toString(),
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: ColorManager.red),
-                ),
-              ],
-            )));
+                      color: ColorManager.red,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Expanded(flex: 2, child: MyDropDownMenuButton()),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _buildLoadingIndicator() {
