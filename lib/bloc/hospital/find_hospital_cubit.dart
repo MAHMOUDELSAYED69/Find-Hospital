@@ -21,23 +21,6 @@ class FindHospitalCubit extends Cubit<FindHospitalState> {
     }
   }
 
-  void openMaps({required double? lat, required double? lng}) async {
-    if (lat != null && lng != null) {
-      emit(OpenMapsLoading());
-      final url = 'https://www.google.com/maps/search/?api=1&query=$lat,$lng';
-      if (await canLaunch(url)) {
-        await launch(url);
-        emit(OpenMapsSuccess());
-      } else {
-        log('Could not launch $url');
-        emit(OpenMapsFailure(message: "Could not launch Google Maps"));
-      }
-    } else {
-      log('Hospital location is not available');
-      emit(OpenMapsFailure(message: "Hospital location is not available"));
-    }
-  }
-
   Future<void> getNearestHospitals({double? radius}) async {
     if (location == null) {
       emit(FindHospitalFailure(message: 'Location is not determined.'));
@@ -75,6 +58,23 @@ class FindHospitalCubit extends Cubit<FindHospitalState> {
     } catch (e) {
       log('Error: $e');
       emit(FindHospitalFailure(message: e.toString()));
+    }
+  }
+
+  void openMaps({required double? lat, required double? lng}) async {
+    if (lat != null && lng != null) {
+      emit(OpenMapsLoading());
+      final url = 'https://www.google.com/maps/search/?api=1&query=$lat,$lng';
+      if (await canLaunch(url)) {
+        await launch(url);
+        emit(OpenMapsSuccess());
+      } else {
+        log('Could not launch $url');
+        emit(OpenMapsFailure(message: "Could not launch Google Maps"));
+      }
+    } else {
+      log('Hospital location is not available');
+      emit(OpenMapsFailure(message: "Hospital location is not available"));
     }
   }
 }

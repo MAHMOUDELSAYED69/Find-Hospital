@@ -26,7 +26,6 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
 
   bool _isLoading = false;
   List<PlaceInfo?> _hospitalList = [];
-  int _totalHospitalFounded = 0;
   @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<FindHospitalCubit>(context);
@@ -71,7 +70,6 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
           } else if (state is FindHospitalSuccess) {
             _isLoading = false;
             _hospitalList = state.hospitalsList;
-            _totalHospitalFounded = state.hospitalsList.length;
           } else if (state is FindHospitalFailure) {
             _isLoading = false;
 
@@ -84,30 +82,40 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
               ? Center(child: _buildLoadingIndicator())
               : Column(
                   children: [
-                    _buildTotalHospital(_totalHospitalFounded),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: _hospitalList.length,
-                        itemBuilder: (context, index) {
-                          return Card(
-                            child: ListTile(
-                              onTap: () {
-                                final PlaceInfo? placeInfo =
-                                    _hospitalList[index];
-                                Navigator.pushNamed(
-                                    context, RouteManager.details,
-                                    arguments: placeInfo);
+                    _buildTotalHospital(_hospitalList.length),
+                    _hospitalList.isNotEmpty
+                        ? Expanded(
+                            child: ListView.builder(
+                              itemCount: _hospitalList.length,
+                              itemBuilder: (context, index) {
+                                return Card(
+                                  child: ListTile(
+                                    onTap: () {
+                                      final PlaceInfo? placeInfo =
+                                          _hospitalList[index];
+                                      Navigator.pushNamed(
+                                          context, RouteManager.details,
+                                          arguments: placeInfo);
+                                    },
+                                    title:
+                                        Text(_hospitalList[index]?.name ?? ""),
+                                    subtitle: Text(
+                                        _hospitalList[index]?.businessStatus ??
+                                            ""),
+                                    trailing: const Icon(Icons.chevron_right),
+                                    leading: const Icon(Icons.healing),
+                                  ),
+                                );
                               },
-                              title: Text(_hospitalList[index]?.name ?? ""),
-                              subtitle: Text(
-                                  _hospitalList[index]?.businessStatus ?? ""),
-                              trailing: const Icon(Icons.chevron_right),
-                              leading: const Icon(Icons.healing),
                             ),
-                          );
-                        },
-                      ),
-                    ),
+                          )
+                        : const Expanded(
+                            child: Icon(
+                              Icons.find_replace_rounded,
+                              size: 100,
+                              color: ColorManager.red,
+                            ),
+                          ),
                   ],
                 );
         },

@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:find_hospital/bloc/hospital/find_hospital_cubit.dart';
 import 'package:find_hospital/core/helper/scaffold_snackbar.dart';
 import 'package:find_hospital/view/widget/custom_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/constant/color.dart';
 import '../../data/models/hospital_model.dart';
@@ -65,47 +62,80 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
 
   Widget _buildHospitalInfoCard() {
     return Card(
-      child: Padding(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Container(
+        height: 500,
         padding: const EdgeInsets.all(16),
-        child: Row(
+        child: Column(
           children: [
-            const Column(
+            Text(
+              widget.hospital?.name ?? 'Unknown Hospital',
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              isHospitalOpen(),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: isHospitalOpen() == "Hospital Open Now!"
+                    ? Colors.green
+                    : ColorManager.red,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(Icons.favorite_border),
-                Icon(
-                  Icons.h_mobiledata,
-                  size: 35,
-                  color: ColorManager.red,
-                )
+                Column(
+                  children: [
+                    const Text(
+                      "Rating",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      widget.hospital?.rating.toString() ?? "N/A",
+                      style: const TextStyle(
+                        color: ColorManager.red,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    const Text(
+                      "Users Ratings Total",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      '${widget.hospital?.userRatingsTotal ?? 0} Users',
+                      style: const TextStyle(
+                        color: ColorManager.red,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
               ],
-            ),
-            const SizedBox(width: 15),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('${widget.hospital?.name}'),
-                  Text(isHospitalOpen()),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Column(
-                children: [
-                  const Text("Rating"),
-                  Text(
-                    widget.hospital?.rating.toString() ?? "",
-                    style: const TextStyle(
-                        color: ColorManager.red, fontWeight: FontWeight.bold),
-                  ),
-                  const Text("Users Ratings Total"),
-                  Text(
-                    '${widget.hospital?.userRatingsTotal} Users',
-                    style: const TextStyle(
-                        color: ColorManager.red, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
             ),
           ],
         ),
