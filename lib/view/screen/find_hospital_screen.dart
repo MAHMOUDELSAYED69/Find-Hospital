@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import '../../core/constant/animation.dart';
 import '../../data/models/hospital_model.dart';
-import '../widget/custom_button.dart';
 import '../widget/custom_dropdown.dart';
 
 class FindHospitalScreen extends StatefulWidget {
@@ -114,7 +113,7 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
     return Card(
       elevation: 6,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 22),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

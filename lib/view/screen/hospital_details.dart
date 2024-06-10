@@ -70,11 +70,11 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          isHospitalOpen(),
+                          _isHospitalOpen(),
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: isHospitalOpen() == "Hospital Open Now!"
+                            color: _isHospitalOpen() == "Open Now!"
                                 ? Colors.green
                                 : ColorManager.red,
                           ),
@@ -83,29 +83,25 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsetsDirectional.only(start: 5),
-                              child: Column(
-                                children: [
-                                  const Text(
-                                    "Rating",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                            Column(
+                              children: [
+                                const Text(
+                                  "Rating",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    widget.hospital?.rating.toString() ?? "N/A",
-                                    style: const TextStyle(
-                                      color: ColorManager.red,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                    ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  widget.hospital?.rating.toString() ?? "N/A",
+                                  style: TextStyle(
+                                    color: _ratingChecker(false),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                             Column(
                               children: [
@@ -119,8 +115,8 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                                 const SizedBox(height: 4),
                                 Text(
                                   '${widget.hospital?.userRatingsTotal ?? 0} Users',
-                                  style: const TextStyle(
-                                    color: ColorManager.red,
+                                  style:  TextStyle(
+                                    color: _ratingChecker(true),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
                                   ),
@@ -131,12 +127,14 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                         ),
                         const Divider(height: 25),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const Text(
-                              'Business Status:',
+                              'Business Status',
                               style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w500),
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             Text(
                               '${widget.hospital?.businessStatus}',
@@ -151,16 +149,25 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            const Text(
-                              'Coordinates:',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w500),
+                            const Expanded(
+                              child: Text(
+                                'Coordinates',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ),
                             Column(
                               children: [
                                 Row(
                                   children: [
-                                    const Text("lat: "),
+                                    const Text(
+                                      "lat: ",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                     SelectableText(
                                       '${widget.hospital?.lat}',
                                       style: const TextStyle(
@@ -181,7 +188,12 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                                   children: [
                                     Row(
                                       children: [
-                                        const Text("lat: "),
+                                        const Text(
+                                          "lng: ",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                         SelectableText(
                                           '${widget.hospital?.lng}',
                                           style: const TextStyle(
@@ -207,12 +219,13 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                         ),
                         const Divider(height: 25),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            const Text(
-                              'Place Id: ',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w500),
+                            const Expanded(
+                              child: Text(
+                                'Place Id',
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
                             ),
                             SizedBox(
                               width: 150,
@@ -261,9 +274,21 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
     );
   }
 
-  String isHospitalOpen() {
-    return widget.hospital?.openNow == true
-        ? "Open Now!"
-        : "Close Now!";
+  String _isHospitalOpen() {
+    return widget.hospital?.openNow == true ? "Open Now!" : "Close Now!";
+  }
+
+  Color _ratingChecker(bool total) {
+    if (widget.hospital?.rating != null && total == false) {
+      return widget.hospital!.rating!.toDouble() > 2.5
+          ? Colors.green
+          : ColorManager.red;
+    }
+    if (widget.hospital?.userRatingsTotal != null && total == true) {
+      return widget.hospital!.userRatingsTotal!.toInt() > 10
+          ? Colors.green
+          : ColorManager.red;
+    }
+    return Colors.red;
   }
 }

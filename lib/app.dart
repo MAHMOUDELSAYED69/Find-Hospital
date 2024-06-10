@@ -9,13 +9,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => FindHospitalCubit(),
-      child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Find Hospital',
-        initialRoute: RouteManager.splash,
-        onGenerateRoute: AppRouter.onGenerateRoute,
-      ),
-    );
+        create: (context) => FindHospitalCubit(),
+        child: Builder(
+          builder: (_) => MaterialApp(
+            builder: (context, widget) {
+              final mediaQueryData = MediaQuery.of(context);
+              final scaledMediaQueryData = mediaQueryData.copyWith(
+                textScaler: TextScaler.noScaling,
+              );
+              return MediaQuery(
+                data: scaledMediaQueryData,
+                child: widget!,
+              );
+            },
+            debugShowCheckedModeBanner: false,
+            title: 'Find Hospital',
+            initialRoute: RouteManager.splash,
+            onGenerateRoute: AppRouter.onGenerateRoute,
+          ),
+        ));
   }
 }

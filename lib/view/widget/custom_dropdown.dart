@@ -2,7 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:find_hospital/core/constant/color.dart';
 import 'package:flutter/material.dart';
 
-double? selectedDoubleValue = 5000;
+double? selectedDoubleValue = 1000;
 
 class MyDropDownMenuButton extends StatefulWidget {
   const MyDropDownMenuButton({super.key});
