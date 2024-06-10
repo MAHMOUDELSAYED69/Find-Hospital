@@ -2,6 +2,7 @@ import 'package:find_hospital/bloc/hospital/find_hospital_cubit.dart';
 import 'package:find_hospital/core/helper/scaffold_snackbar.dart';
 import 'package:find_hospital/view/widget/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/constant/color.dart';
 import '../../data/models/hospital_model.dart';
@@ -15,6 +16,11 @@ class HospitalDetailScreen extends StatefulWidget {
 }
 
 class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
+  void _copyText(String? text) {
+    Clipboard.setData(ClipboardData(text: text!));
+    customSnackBar(context, "Text copied to clipboard");
+  }
+
   bool _isloading = false;
   @override
   Widget build(BuildContext context) {
@@ -91,29 +97,32 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                     : ColorManager.red,
               ),
             ),
-            const SizedBox(height: 20),
+            const Divider(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  children: [
-                    const Text(
-                      "Rating",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                Padding(
+                  padding: const EdgeInsetsDirectional.only(start: 5),
+                  child: Column(
+                    children: [
+                      const Text(
+                        "Rating",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      widget.hospital?.rating.toString() ?? "N/A",
-                      style: const TextStyle(
-                        color: ColorManager.red,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                      const SizedBox(height: 4),
+                      Text(
+                        widget.hospital?.rating.toString() ?? "N/A",
+                        style: const TextStyle(
+                          color: ColorManager.red,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Column(
                   children: [
@@ -136,6 +145,78 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                   ],
                 ),
               ],
+            ),
+            const Divider(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const Text(
+                  'businessStatus:',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                Text(
+                  '${widget.hospital?.businessStatus}',
+                  style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green),
+                ),
+              ],
+            ),
+            const Divider(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const Text(
+                  'coordinates:',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                ),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        const Text("lat: "),
+                        SelectableText(
+                          '${widget.hospital?.lat}',
+                          style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green),
+                        ),
+                        IconButton(
+                            onPressed: () =>
+                                _copyText(widget.hospital?.lat.toString()),
+                            icon: const Icon(Icons.copy,size: 20,))
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            const Text("lat: "),
+                            SelectableText(
+                              '${widget.hospital?.lng}',
+                              style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.green),
+                            ),
+                            IconButton(
+                                onPressed: () =>
+                                    _copyText(widget.hospital?.lng.toString()),
+                                icon: const Icon(Icons.copy,size: 20,))
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            const Divider(
+              height: 20,
             ),
           ],
         ),
