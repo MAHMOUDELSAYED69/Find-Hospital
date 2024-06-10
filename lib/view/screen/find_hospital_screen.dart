@@ -39,28 +39,15 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                 fontStyle: FontStyle.italic, fontWeight: FontWeight.w500),
           )),
       endDrawer: const Drawer(),
-      bottomNavigationBar: Card(
-        elevation: 2,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(12),
-            topRight: Radius.circular(12),
-          ),
-        ),
-        color: ColorManager.red,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const SizedBox(height: 20),
-            CustomButton(
-                isLoading: _isLoading,
-                title: "Get Nearest Hospital",
-                onPressed: () {
-                  cubit.getCurrentLocation(context);
-                  cubit.getNearestHospitals(radius: selectedDoubleValue);
-                }),
-            const SizedBox(height: 20),
-          ],
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: ColorManager.red,
+        onPressed: () {
+          cubit.getCurrentLocation(context);
+          cubit.getNearestHospitals(radius: selectedDoubleValue);
+        },
+        child: const Icon(
+          Icons.location_on,
+          color: ColorManager.black,
         ),
       ),
       body: BlocConsumer<FindHospitalCubit, FindHospitalState>(

@@ -8,20 +8,23 @@ class CustomButton extends StatelessWidget {
       required this.title,
       this.onPressed,
       this.isLoading = false,
-      this.iconData});
+      this.iconData,
+      this.bgColor});
   final String title;
   final void Function()? onPressed;
   final bool isLoading;
   final IconData? iconData;
+  final Color? bgColor;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
+        backgroundColor: bgColor ?? ColorManager.red,
         elevation: 3,
         splashFactory: InkRipple.splashFactory,
         foregroundColor: ColorManager.grey,
-        fixedSize: const Size(double.infinity, 50),
+        fixedSize: Size(MediaQuery.sizeOf(context).width - 40, 50),
       ),
       onPressed: isLoading == false ? onPressed : null,
       child: Row(
@@ -33,7 +36,7 @@ class CustomButton extends StatelessWidget {
           const SizedBox(width: 10),
           Icon(
             iconData ?? Icons.location_on,
-            color: ColorManager.red,
+            color: ColorManager.black,
           ),
           const SizedBox(width: 10),
         ],
