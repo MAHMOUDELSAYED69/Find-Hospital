@@ -10,6 +10,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../core/constant/color.dart';
 import '../../data/services/find_hospital.dart';
+import '../../view/widget/custom_dropdown.dart';
 
 part 'find_hospital_state.dart';
 
@@ -75,6 +76,7 @@ class FindHospitalCubit extends Cubit<FindHospitalState> {
         emit(FindHospitalSuccess(hospitalsList: hospitalsList));
         log('Success: Loaded nearest hospitals.');
       }
+      await CacheData.set(key: 'selectedValue', value: selectedDoubleValue);
     } catch (e) {
       log('Error: $e');
       emit(FindHospitalFailure(message: e.toString()));

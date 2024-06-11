@@ -27,7 +27,11 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
     final cubit = BlocProvider.of<FindHospitalCubit>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Hospital Info"),
+        title: const Text(
+          "Hospital Info",
+          style: TextStyle(
+              fontStyle: FontStyle.italic, fontWeight: FontWeight.w500),
+        ),
         backgroundColor: ColorManager.red,
         titleSpacing: 0,
       ),

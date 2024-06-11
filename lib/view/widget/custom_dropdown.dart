@@ -30,7 +30,6 @@ class _MyDropDownMenuButtonState extends State<MyDropDownMenuButton> {
       onChanged: (double? newValue) {
         setState(() {
           selectedDoubleValue = newValue;
-          CacheData.set(key: 'selectedValue', value: newValue);
         });
       },
       items: _doubleValues.map((double value) {
