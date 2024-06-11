@@ -102,9 +102,16 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                                         },
                                         title: Text(
                                             _hospitalList[index]?.name ?? ''),
-                                        subtitle: Text(_hospitalList[index]
-                                                ?.businessStatus ??
-                                            ""),
+                                        subtitle: Text(
+                                          cubit.isHospitalOpen(
+                                              _hospitalList[index]?.openNow),
+                                          style: TextStyle(
+                                              color: _hospitalList[index]
+                                                          ?.openNow ==
+                                                      true
+                                                  ? Colors.green
+                                                  : ColorManager.red),
+                                        ),
                                         trailing:
                                             const Icon(Icons.chevron_right),
                                         leading: const Icon(Icons.healing),
@@ -142,8 +149,21 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                                               );
                                             },
                                             title: Text(hospital['name']),
-                                            subtitle: Text(
-                                                'Rating: ${hospital['rate']}'),
+                                            subtitle: Row(
+                                              children: [
+                                                Text(
+                                                  cubit.isHospitalOpen(
+                                                      hospital['openNow']),
+                                                  style: TextStyle(
+                                                      color:
+                                                          hospital['openNow'] ==
+                                                                  true
+                                                              ? Colors.green
+                                                              : ColorManager
+                                                                  .red),
+                                                ),
+                                              ],
+                                            ),
                                             trailing:
                                                 const Icon(Icons.chevron_right),
                                             leading: const Icon(Icons.healing),
@@ -166,14 +186,21 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                   CacheData.getLastUpdatedTime('LastUpdated') != null &&
                   state is! FindHospitalLoading)
                 Positioned(
-                    left: 10,
-                    bottom: 10,
-                    child: Text(
-                      "Last Update: ${CacheData.getLastUpdatedTime('LastUpdated')}",
-                      style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.green),
+                    left: 5,
+                    bottom: 5,
+                    child: Card(
+                      elevation: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 5),
+                        child: Text(
+                          "Last Update: ${CacheData.getLastUpdatedTime('LastUpdated')}",
+                          style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green),
+                        ),
+                      ),
                     )),
             ],
           );
@@ -184,7 +211,7 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
 
   Widget _buildTotalHospital(int totalHospital) {
     return Card(
-      elevation: 6,
+      elevation: 2,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         child: Row(

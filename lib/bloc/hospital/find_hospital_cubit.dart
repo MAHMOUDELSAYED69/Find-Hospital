@@ -5,9 +5,10 @@ import 'package:bloc/bloc.dart';
 import 'package:find_hospital/core/cache/cache.dart';
 import 'package:find_hospital/core/helper/location.dart';
 import 'package:find_hospital/data/models/hospital_model.dart';
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:meta/meta.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../core/constant/color.dart';
 import '../../data/services/find_hospital.dart';
 
 part 'find_hospital_state.dart';
@@ -95,5 +96,19 @@ class FindHospitalCubit extends Cubit<FindHospitalState> {
       log('Hospital location is not available');
       emit(OpenMapsFailure(message: "Hospital location is not available"));
     }
+  }
+
+  String isHospitalOpen(bool? isOpenNow) {
+    return isOpenNow == true ? "Open Now!" : "Close Now!";
+  }
+
+  Color ratingChecker({double? rating, int? totalRating}) {
+    if (rating != null) {
+      return rating > 2.5 ? Colors.green : ColorManager.red;
+    }
+    if (totalRating != null) {
+      return totalRating > 10 ? Colors.green : ColorManager.red;
+    }
+    return Colors.red;
   }
 }

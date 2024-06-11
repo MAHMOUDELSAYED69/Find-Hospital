@@ -70,11 +70,13 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          _isHospitalOpen(),
+                          cubit.isHospitalOpen(widget.hospital?.openNow),
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: _isHospitalOpen() == "Open Now!"
+                            color: cubit.isHospitalOpen(
+                                        widget.hospital?.openNow) ==
+                                    "Open Now!"
                                 ? Colors.green
                                 : ColorManager.red,
                           ),
@@ -96,7 +98,8 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                                 Text(
                                   widget.hospital?.rating.toString() ?? "N/A",
                                   style: TextStyle(
-                                    color: _ratingChecker(false),
+                                    color: cubit.ratingChecker(
+                                        rating: widget.hospital?.rating),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
                                   ),
@@ -115,8 +118,10 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                                 const SizedBox(height: 4),
                                 Text(
                                   '${widget.hospital?.userRatingsTotal ?? 0} Users',
-                                  style:  TextStyle(
-                                    color: _ratingChecker(true),
+                                  style: TextStyle(
+                                    color: cubit.ratingChecker(
+                                        totalRating:
+                                            widget.hospital?.userRatingsTotal),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
                                   ),
@@ -272,23 +277,5 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
         ),
       ),
     );
-  }
-
-  String _isHospitalOpen() {
-    return widget.hospital?.openNow == true ? "Open Now!" : "Close Now!";
-  }
-
-  Color _ratingChecker(bool total) {
-    if (widget.hospital?.rating != null && total == false) {
-      return widget.hospital!.rating!.toDouble() > 2.5
-          ? Colors.green
-          : ColorManager.red;
-    }
-    if (widget.hospital?.userRatingsTotal != null && total == true) {
-      return widget.hospital!.userRatingsTotal!.toInt() > 10
-          ? Colors.green
-          : ColorManager.red;
-    }
-    return Colors.red;
   }
 }
