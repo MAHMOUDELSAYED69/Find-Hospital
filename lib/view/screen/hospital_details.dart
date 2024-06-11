@@ -55,7 +55,7 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                     borderRadius: BorderRadius.circular(15.r),
                   ),
                   child: Container(
-                    padding: const EdgeInsets.all(16),
+                    padding: EdgeInsets.all(16.w),
                     child: Column(
                       children: [
                         SizedBox(height: 8.h),

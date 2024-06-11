@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:find_hospital/core/cache/cache.dart';
 import 'package:find_hospital/core/constant/color.dart';
+import 'package:find_hospital/core/helper/extentions.dart';
 import 'package:flutter/material.dart';
 
 double? selectedDoubleValue = CacheData.get(key: 'selectedValue') ?? 1000;
@@ -19,6 +20,7 @@ class _MyDropDownMenuButtonState extends State<MyDropDownMenuButton> {
     return DropdownButton2<double>(
       dropdownStyleData: DropdownStyleData(
           decoration: BoxDecoration(
+        color: context.theme.scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(16),
       )),
       barrierColor: ColorManager.red.withOpacity(0.04),
@@ -40,20 +42,17 @@ class _MyDropDownMenuButtonState extends State<MyDropDownMenuButton> {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(value.toString(),
-                  textScaler: TextScaler.noScaling,
-                  style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: ColorManager.red)),
-              const Text(
+              Text(
+                value.toString(),
+                textScaler: TextScaler.noScaling,
+                style: context.textTheme.bodySmall
+                    ?.copyWith(color: ColorManager.red),
+              ),
+              Text(
                 " m",
                 textScaler: TextScaler.noScaling,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                  color: ColorManager.red,
-                ),
+                style: context.textTheme.bodySmall
+                    ?.copyWith(color: ColorManager.red),
               ),
             ],
           ),

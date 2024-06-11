@@ -1,4 +1,6 @@
+import 'package:find_hospital/core/helper/extentions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../core/constant/color.dart';
 
@@ -24,7 +26,7 @@ class CustomButton extends StatelessWidget {
         elevation: 3,
         splashFactory: InkRipple.splashFactory,
         foregroundColor: ColorManager.grey,
-        fixedSize: Size(MediaQuery.sizeOf(context).width - 40, 50),
+        fixedSize: Size(context.width - 40.w, 50),
       ),
       onPressed: isLoading == false ? onPressed : null,
       child: Row(
@@ -32,7 +34,7 @@ class CustomButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(width: 10),
-          Text(title, style: const TextStyle(color: ColorManager.black)),
+          Text(title, style:context.textTheme.bodyMedium),
           const SizedBox(width: 10),
           Icon(
             iconData ?? Icons.location_on,

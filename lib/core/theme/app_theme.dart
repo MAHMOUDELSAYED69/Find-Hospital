@@ -34,12 +34,12 @@ abstract class AppTheme {
             color: ColorManager.black,
             fontWeight: FontWeight.bold),
         bodyMedium: TextStyle(
-          fontSize: 14.sp,
-          color: ColorManager.black,
-         fontWeight: FontWeight.w500
-        ),
+            fontSize: 14.sp,
+            color: ColorManager.black,
+            fontWeight: FontWeight.w500),
         bodySmall: TextStyle(
           fontSize: 12.spMin,
+          fontWeight: FontWeight.w500,
           color: ColorManager.black,
         ),
       ),

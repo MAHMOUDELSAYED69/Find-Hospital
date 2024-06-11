@@ -47,6 +47,7 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
       appBar: AppBar(
         title: const Text("Find Hospital"),
       ),
+      //endDrawer: _endDrawer(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: ColorManager.red,
         onPressed: () {
@@ -95,7 +96,7 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                                         },
                                         title: Text(
                                           _hospitalList[index]?.name ?? '',
-                                          style: context.textTheme.bodyLarge,
+                                          style: context.textTheme.bodyMedium,
                                         ),
                                         subtitle: Text(
                                           cubit.isHospitalOpen(
@@ -187,15 +188,15 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                   CacheData.getLastUpdatedTime('LastUpdated') != null &&
                   state is! FindHospitalLoading)
                 Positioned(
-                    left: 5,
-                    bottom: 5,
+                    left: 5.w,
+                    bottom: 5.h,
                     child: Card(
                       color: ColorManager.red,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 5),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 12.w, vertical: 5.h),
                         child: Text(
-                            "Last Update: ${CacheData.getLastUpdatedTime('LastUpdated')}",
+                            "Last Updated: ${CacheData.getLastUpdatedTime('LastUpdated')}",
                             style: context.textTheme.bodyMedium),
                       ),
                     )),
@@ -205,12 +206,21 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
       ),
     );
   }
+  // ! next
+  Widget _endDrawer() {
+    return Drawer(
+      backgroundColor: context.theme.scaffoldBackgroundColor,
+      child: Column(
+        children: [],
+      ),
+    );
+  }
 
   Widget _buildTotalHospital(int totalHospital) {
     return Card(
       elevation: 2,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+        padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 12.w),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
