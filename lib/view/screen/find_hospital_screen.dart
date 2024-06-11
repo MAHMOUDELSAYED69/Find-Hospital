@@ -6,6 +6,7 @@ import 'package:find_hospital/core/helper/extentions.dart';
 import 'package:find_hospital/core/helper/scaffold_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import '../../core/constant/animation.dart';
 import '../../data/models/hospital_model.dart';
@@ -44,23 +45,15 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
     final cubit = context.bloc<FindHospitalCubit>();
     return Scaffold(
       appBar: AppBar(
-          foregroundColor: ColorManager.black,
-          backgroundColor: ColorManager.red,
-          title: const Text(
-            "Find Hospital",
-            style: TextStyle(
-                fontStyle: FontStyle.italic, fontWeight: FontWeight.w500),
-          )),
+        title: const Text("Find Hospital"),
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: ColorManager.red,
         onPressed: () {
           cubit.getCurrentLocation(context);
           cubit.getNearestHospitals(radius: selectedDoubleValue);
         },
-        child: const Icon(
-          Icons.location_on,
-          color: ColorManager.black,
-        ),
+        child: Icon(Icons.location_on, color: context.iconTheme.color),
       ),
       body: BlocConsumer<FindHospitalCubit, FindHospitalState>(
         listener: (context, state) {
@@ -101,16 +94,19 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                                               arguments: placeInfo);
                                         },
                                         title: Text(
-                                            _hospitalList[index]?.name ?? ''),
+                                          _hospitalList[index]?.name ?? '',
+                                          style: context.textTheme.bodyLarge,
+                                        ),
                                         subtitle: Text(
                                           cubit.isHospitalOpen(
                                               _hospitalList[index]?.openNow),
-                                          style: TextStyle(
-                                              color: _hospitalList[index]
-                                                          ?.openNow ==
-                                                      true
-                                                  ? Colors.green
-                                                  : ColorManager.red),
+                                          style: context.textTheme.bodyMedium
+                                              ?.copyWith(
+                                                  color: _hospitalList[index]
+                                                              ?.openNow ==
+                                                          true
+                                                      ? Colors.green
+                                                      : ColorManager.red),
                                         ),
                                         trailing:
                                             const Icon(Icons.chevron_right),
@@ -148,15 +144,20 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                                                         'userRatingsTotal']),
                                               );
                                             },
-                                            title: Text(hospital['name']),
+                                            title: Text(hospital['name'],
+                                                style: context
+                                                    .textTheme.bodyMedium),
                                             subtitle: Row(
                                               children: [
                                                 Text(
                                                   cubit.isHospitalOpen(
-                                                      hospital['openNow']),
-                                                  style: TextStyle(
-                                                      color:
-                                                          hospital['openNow'] ==
+                                                    hospital['openNow'],
+                                                  ),
+                                                  style: context
+                                                      .textTheme.bodyMedium
+                                                      ?.copyWith(
+                                                          color: hospital[
+                                                                      'openNow'] ==
                                                                   true
                                                               ? Colors.green
                                                               : ColorManager
@@ -172,10 +173,10 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                                       },
                                     ),
                                   )
-                                : const Expanded(
+                                : Expanded(
                                     child: Icon(
                                       Icons.find_replace_rounded,
-                                      size: 100,
+                                      size: 100.sp,
                                       color: ColorManager.red,
                                     ),
                                   ),
@@ -189,17 +190,13 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                     left: 5,
                     bottom: 5,
                     child: Card(
-                      elevation: 2,
+                      color: ColorManager.red,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 5),
+                            horizontal: 12, vertical: 5),
                         child: Text(
-                          "Last Update: ${CacheData.getLastUpdatedTime('LastUpdated')}",
-                          style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.green),
-                        ),
+                            "Last Update: ${CacheData.getLastUpdatedTime('LastUpdated')}",
+                            style: context.textTheme.bodyMedium),
                       ),
                     )),
             ],
@@ -221,17 +218,14 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
               flex: 5,
               child: Row(
                 children: [
-                  const Text(
+                  Text(
                     "Total hospital Founded: ",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    style: context.textTheme.bodyMedium,
                   ),
                   Text(
                     totalHospital.toString(),
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: ColorManager.red,
-                    ),
+                    style: context.textTheme.bodyMedium
+                        ?.copyWith(color: ColorManager.red),
                   ),
                 ],
               ),

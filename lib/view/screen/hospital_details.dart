@@ -5,6 +5,7 @@ import 'package:find_hospital/view/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../core/constant/color.dart';
 import '../../data/models/hospital_model.dart';
 
@@ -28,13 +29,7 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
     final cubit = context.bloc<FindHospitalCubit>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Hospital Info",
-          style: TextStyle(
-              fontStyle: FontStyle.italic, fontWeight: FontWeight.w500),
-        ),
-        backgroundColor: ColorManager.red,
-        titleSpacing: 0,
+        title: const Text("Hospital Info"),
       ),
       body: Center(
         child: Column(
@@ -57,28 +52,23 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                 return Card(
                   elevation: 4,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(15.r),
                   ),
                   child: Container(
                     padding: const EdgeInsets.all(16),
                     child: Column(
                       children: [
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8.h),
                         Text(
                           widget.hospital?.name ?? 'Unknown Hospital',
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87,
-                          ),
+                          style: context.textTheme.bodyLarge
+                              ?.copyWith(fontSize: 20.sp),
                         ),
-                        const SizedBox(height: 8),
+                        SizedBox(height: 8.h),
                         Text(
                           cubit.isHospitalOpen(widget.hospital?.openNow),
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                          style: context.textTheme.bodyLarge?.copyWith(
                             color: cubit.isHospitalOpen(
                                         widget.hospital?.openNow) ==
                                     "Open Now!"
@@ -86,111 +76,92 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                                 : ColorManager.red,
                           ),
                         ),
-                        const Divider(height: 25),
+                        Divider(height: 25.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
                               children: [
-                                const Text(
+                                Text(
                                   "Rating",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: context.textTheme.bodyMedium,
                                 ),
-                                const SizedBox(height: 4),
+                                SizedBox(height: 4.h),
                                 Text(
                                   widget.hospital?.rating.toString() ?? "N/A",
-                                  style: TextStyle(
+                                  style: context.textTheme.bodyMedium?.copyWith(
                                     color: cubit.ratingChecker(
                                         rating: widget.hospital?.rating),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
                                   ),
                                 ),
                               ],
                             ),
                             Column(
                               children: [
-                                const Text(
+                                Text(
                                   "Users Ratings Total",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: context.textTheme.bodyMedium,
                                 ),
-                                const SizedBox(height: 4),
+                                SizedBox(height: 4.h),
                                 Text(
                                   '${widget.hospital?.userRatingsTotal ?? 0} Users',
-                                  style: TextStyle(
+                                  style: context.textTheme.bodyMedium?.copyWith(
                                     color: cubit.ratingChecker(
                                         totalRating:
                                             widget.hospital?.userRatingsTotal),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
                                   ),
                                 ),
                               ],
                             ),
                           ],
                         ),
-                        const Divider(height: 25),
+                        Divider(height: 25.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
+                            Text(
                               'Business Status',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: context.textTheme.bodyMedium,
                             ),
                             Text(
                               '${widget.hospital?.businessStatus}',
-                              style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.green),
+                              style: context.textTheme.bodyMedium
+                                  ?.copyWith(color: ColorManager.green),
                             ),
                           ],
                         ),
-                        const Divider(height: 25),
+                        Divider(height: 25.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            const Expanded(
+                            Expanded(
                               child: Text(
                                 'Coordinates',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: context.textTheme.bodyMedium,
                               ),
                             ),
                             Column(
                               children: [
                                 Row(
                                   children: [
-                                    const Text(
+                                    Text(
                                       "lat: ",
-                                      style: TextStyle(
+                                      style: context.textTheme.bodyMedium
+                                          ?.copyWith(
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     SelectableText(
                                       '${widget.hospital?.lat}',
-                                      style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.green),
+                                      style: context.textTheme.bodyMedium
+                                          ?.copyWith(color: ColorManager.green),
                                     ),
                                     IconButton(
                                         onPressed: () => _copyText(
                                             widget.hospital?.lat.toString()),
-                                        icon: const Icon(
+                                        icon: Icon(
                                           Icons.copy,
-                                          size: 20,
+                                          size: 20.spMin,
                                         ))
                                   ],
                                 ),
@@ -198,26 +169,26 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                                   children: [
                                     Row(
                                       children: [
-                                        const Text(
+                                        Text(
                                           "lng: ",
-                                          style: TextStyle(
+                                          style: context.textTheme.bodyMedium
+                                              ?.copyWith(
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                         SelectableText(
                                           '${widget.hospital?.lng}',
-                                          style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.green),
+                                          style: context.textTheme.bodyMedium
+                                              ?.copyWith(
+                                                  color: ColorManager.green),
                                         ),
                                         IconButton(
                                             onPressed: () => _copyText(widget
                                                 .hospital?.lng
                                                 .toString()),
-                                            icon: const Icon(
+                                            icon: Icon(
                                               Icons.copy,
-                                              size: 20,
+                                              size: 20.spMin,
                                             ))
                                       ],
                                     ),
@@ -227,40 +198,36 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                             ),
                           ],
                         ),
-                        const Divider(height: 25),
+                        Divider(height: 25.h),
                         Row(
                           children: [
-                            const Expanded(
+                            Expanded(
                               child: Text(
                                 'Place Id',
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
+                                style: context.textTheme.bodyMedium,
                               ),
                             ),
                             SizedBox(
                               width: 150,
                               child: Text(
                                 '${widget.hospital?.placeId}',
-                                style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.green),
+                                style: context.textTheme.bodyMedium
+                                    ?.copyWith(color: ColorManager.green),
                               ),
                             ),
                             IconButton(
                                 onPressed: () => _copyText(
                                     widget.hospital?.placeId.toString()),
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.copy,
-                                  size: 20,
+                                  size: 20.spMin,
                                 ))
                           ],
                         ),
-                        const Divider(height: 25),
+                        Divider(height: 25.h),
                         CustomButton(
-                          bgColor: ColorManager.red,
                           iconData: Icons.map_sharp,
-                          title: "Open Google Maps",
+                          title: "Open In Google Maps",
                           isLoading: _isloading,
                           onPressed: () {
                             cubit.openMaps(
