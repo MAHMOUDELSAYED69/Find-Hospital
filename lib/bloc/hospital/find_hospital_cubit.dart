@@ -62,6 +62,7 @@ class FindHospitalCubit extends Cubit<FindHospitalState> {
         };
       }).toList();
 
+      await CacheData.setLastUpdatedTime('LastUpdated');
       await CacheData.setListOfMaps(
           key: 'nearestHospitals', value: hospitalsCacheData);
       log('Success: Cached nearest hospitals data.');

@@ -1,8 +1,9 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:find_hospital/core/cache/cache.dart';
 import 'package:find_hospital/core/constant/color.dart';
 import 'package:flutter/material.dart';
 
-double? selectedDoubleValue = 1000;
+double? selectedDoubleValue = CacheData.get(key: 'selectedValue') ?? 1000;
 
 class MyDropDownMenuButton extends StatefulWidget {
   const MyDropDownMenuButton({super.key});
@@ -29,6 +30,7 @@ class _MyDropDownMenuButtonState extends State<MyDropDownMenuButton> {
       onChanged: (double? newValue) {
         setState(() {
           selectedDoubleValue = newValue;
+          CacheData.set(key: 'selectedValue', value: newValue);
         });
       },
       items: _doubleValues.map((double value) {

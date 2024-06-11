@@ -65,84 +65,46 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
       body: BlocConsumer<FindHospitalCubit, FindHospitalState>(
         listener: (context, state) {
           if (state is FindHospitalLoading) {
-            setState(() {
-              _isLoading = true;
-            });
+            _isLoading = true;
           } else if (state is FindHospitalSuccess) {
-            setState(() {
-              _isLoading = false;
-              _hospitalList = state.hospitalsList;
-            });
+            _isLoading = false;
+            _hospitalList = state.hospitalsList;
           } else if (state is FindHospitalFailure) {
-            setState(() {
-              _isLoading = false;
-            });
+            _isLoading = false;
+
             customSnackBar(
                 context, 'There was an error! Please try again later.');
           }
         },
         builder: (context, state) {
-          return _isLoading
-              ? Center(child: _buildLoadingIndicator())
-              : Column(
-                  children: [
-                    _buildTotalHospital(_hospitalList.isNotEmpty
-                        ? _hospitalList.length
-                        : _cachedHospitalList.length),
-                    _hospitalList.isNotEmpty
-                        ? Expanded(
-                            child: ListView.builder(
-                              itemCount: _hospitalList.length,
-                              itemBuilder: (context, index) {
-                                return Card(
-                                  child: ListTile(
-                                    onTap: () {
-                                      final PlaceInfo? placeInfo =
-                                          _hospitalList[index];
-                                      Navigator.pushNamed(
-                                          context, RouteManager.details,
-                                          arguments: placeInfo);
-                                    },
-                                    title:
-                                        Text(_hospitalList[index]?.name ?? ''),
-                                    subtitle: Text(
-                                        _hospitalList[index]?.businessStatus ??
-                                            ""),
-                                    trailing: const Icon(Icons.chevron_right),
-                                    leading: const Icon(Icons.healing),
-                                  ),
-                                );
-                              },
-                            ),
-                          )
-                        : _cachedHospitalList.isNotEmpty
+          return Stack(
+            children: [
+              _isLoading
+                  ? Center(child: _buildLoadingIndicator())
+                  : Column(
+                      children: [
+                        _buildTotalHospital(_hospitalList.isNotEmpty
+                            ? _hospitalList.length
+                            : _cachedHospitalList.length),
+                        _hospitalList.isNotEmpty
                             ? Expanded(
                                 child: ListView.builder(
-                                  itemCount: _cachedHospitalList.length,
+                                  itemCount: _hospitalList.length,
                                   itemBuilder: (context, index) {
-                                    final hospital = _cachedHospitalList[index];
                                     return Card(
                                       child: ListTile(
                                         onTap: () {
+                                          final PlaceInfo? placeInfo =
+                                              _hospitalList[index];
                                           Navigator.pushNamed(
-                                            context,
-                                            RouteManager.details,
-                                            arguments: PlaceInfo(
-                                                name: hospital['name'],
-                                                rating: hospital['rate'],
-                                                placeId: hospital['placeId'],
-                                                lat: hospital['lat'],
-                                                lng: hospital['lng'],
-                                                businessStatus:
-                                                    hospital['businessStatus'],
-                                                openNow: hospital['openNow'],
-                                                userRatingsTotal: hospital[
-                                                    'userRatingsTotal']),
-                                          );
+                                              context, RouteManager.details,
+                                              arguments: placeInfo);
                                         },
-                                        title: Text(hospital['name']),
-                                        subtitle:
-                                            Text('Rating: ${hospital['rate']}'),
+                                        title: Text(
+                                            _hospitalList[index]?.name ?? ''),
+                                        subtitle: Text(_hospitalList[index]
+                                                ?.businessStatus ??
+                                            ""),
                                         trailing:
                                             const Icon(Icons.chevron_right),
                                         leading: const Icon(Icons.healing),
@@ -151,15 +113,70 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                                   },
                                 ),
                               )
-                            : const Expanded(
-                                child: Icon(
-                                  Icons.find_replace_rounded,
-                                  size: 100,
-                                  color: ColorManager.red,
-                                ),
-                              ),
-                  ],
-                );
+                            : _cachedHospitalList.isNotEmpty
+                                ? Expanded(
+                                    child: ListView.builder(
+                                      itemCount: _cachedHospitalList.length,
+                                      itemBuilder: (context, index) {
+                                        final hospital =
+                                            _cachedHospitalList[index];
+                                        return Card(
+                                          child: ListTile(
+                                            onTap: () {
+                                              Navigator.pushNamed(
+                                                context,
+                                                RouteManager.details,
+                                                arguments: PlaceInfo(
+                                                    name: hospital['name'],
+                                                    rating: hospital['rate'],
+                                                    placeId:
+                                                        hospital['placeId'],
+                                                    lat: hospital['lat'],
+                                                    lng: hospital['lng'],
+                                                    businessStatus: hospital[
+                                                        'businessStatus'],
+                                                    openNow:
+                                                        hospital['openNow'],
+                                                    userRatingsTotal: hospital[
+                                                        'userRatingsTotal']),
+                                              );
+                                            },
+                                            title: Text(hospital['name']),
+                                            subtitle: Text(
+                                                'Rating: ${hospital['rate']}'),
+                                            trailing:
+                                                const Icon(Icons.chevron_right),
+                                            leading: const Icon(Icons.healing),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  )
+                                : const Expanded(
+                                    child: Icon(
+                                      Icons.find_replace_rounded,
+                                      size: 100,
+                                      color: ColorManager.red,
+                                    ),
+                                  ),
+                      ],
+                    ),
+              if (_hospitalList.isEmpty &&
+                  _cachedHospitalList.isNotEmpty &&
+                  CacheData.getLastUpdatedTime('LastUpdated') != null &&
+                  state is! FindHospitalLoading)
+                Positioned(
+                    left: 10,
+                    bottom: 10,
+                    child: Text(
+                      "Last Update: ${CacheData.getLastUpdatedTime('LastUpdated')}",
+                      style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green),
+                    )),
+            ],
+          );
         },
       ),
     );
