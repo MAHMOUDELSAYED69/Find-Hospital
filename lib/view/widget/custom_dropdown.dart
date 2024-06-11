@@ -21,7 +21,7 @@ class _MyDropDownMenuButtonState extends State<MyDropDownMenuButton> {
           decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
       )),
-      barrierColor: ColorManager.red.withOpacity(0.1),
+      barrierColor: ColorManager.red.withOpacity(0.04),
       menuItemStyleData: const MenuItemStyleData(
         padding: EdgeInsets.symmetric(horizontal: 5),
       ),

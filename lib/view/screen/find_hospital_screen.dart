@@ -2,6 +2,7 @@ import 'package:find_hospital/bloc/hospital/find_hospital_cubit.dart';
 import 'package:find_hospital/core/cache/cache.dart';
 import 'package:find_hospital/core/constant/color.dart';
 import 'package:find_hospital/core/constant/routes.dart';
+import 'package:find_hospital/core/helper/extentions.dart';
 import 'package:find_hospital/core/helper/scaffold_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,8 +22,7 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<FindHospitalCubit>(context).getCurrentLocation(context);
-    BlocProvider.of<FindHospitalCubit>(context).getCurrentLocation(context);
+    context.bloc<FindHospitalCubit>().getCurrentLocation(context);
     _loadCachedHospitals();
   }
 
@@ -41,13 +41,13 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
   List<Map<String, dynamic>> _cachedHospitalList = [];
   @override
   Widget build(BuildContext context) {
-    final cubit = BlocProvider.of<FindHospitalCubit>(context);
+    final cubit = context.bloc<FindHospitalCubit>();
     return Scaffold(
       appBar: AppBar(
           foregroundColor: ColorManager.black,
           backgroundColor: ColorManager.red,
           title: const Text(
-            "Find Hospital Screen",
+            "Find Hospital",
             style: TextStyle(
                 fontStyle: FontStyle.italic, fontWeight: FontWeight.w500),
           )),
@@ -213,7 +213,7 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
     return Card(
       elevation: 2,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -223,7 +223,7 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                 children: [
                   const Text(
                     "Total hospital Founded: ",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
                   Text(
                     totalHospital.toString(),

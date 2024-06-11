@@ -1,4 +1,5 @@
 import 'package:find_hospital/bloc/hospital/find_hospital_cubit.dart';
+import 'package:find_hospital/core/helper/extentions.dart';
 import 'package:find_hospital/core/helper/scaffold_snackbar.dart';
 import 'package:find_hospital/view/widget/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
   bool _isloading = false;
   @override
   Widget build(BuildContext context) {
-    final cubit = BlocProvider.of<FindHospitalCubit>(context);
+    final cubit = context.bloc<FindHospitalCubit>();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
