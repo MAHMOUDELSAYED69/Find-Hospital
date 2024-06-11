@@ -2,21 +2,21 @@ class PlaceInfo {
   final String businessStatus;
   final double lat;
   final double lng;
-  final double northeastLat;
-  final double northeastLng;
-  final double southwestLat;
-  final double southwestLng;
-  final String icon;
-  final String iconBackgroundColor;
-  final String iconMaskBaseUri;
+  final double? northeastLat;
+  final double? northeastLng;
+  final double? southwestLat;
+  final double? southwestLng;
+  final String? icon;
+  final String? iconBackgroundColor;
+  final String? iconMaskBaseUri;
   final String name;
   final String placeId;
-  final String compoundCode;
-  final String globalCode;
-  final String reference;
-  final String scope;
-  final List<String> types;
-  final String vicinity;
+  final String? compoundCode;
+  final String? globalCode;
+  final String? reference;
+  final String? scope;
+  final List<String>? types;
+  final String? vicinity;
   final bool? openNow;
   final List<Map<String, dynamic>>? photos;
   final double? rating;
@@ -26,21 +26,21 @@ class PlaceInfo {
     required this.businessStatus,
     required this.lat,
     required this.lng,
-    required this.northeastLat,
-    required this.northeastLng,
-    required this.southwestLat,
-    required this.southwestLng,
-    required this.icon,
-    required this.iconBackgroundColor,
-    required this.iconMaskBaseUri,
+    this.northeastLat,
+    this.northeastLng,
+    this.southwestLat,
+    this.southwestLng,
+    this.icon,
+    this.iconBackgroundColor,
+    this.iconMaskBaseUri,
     required this.name,
     required this.placeId,
-    required this.compoundCode,
-    required this.globalCode,
-    required this.reference,
-    required this.scope,
-    required this.types,
-    required this.vicinity,
+    this.compoundCode,
+    this.globalCode,
+    this.reference,
+    this.scope,
+    this.types,
+    this.vicinity,
     this.openNow,
     this.photos,
     this.rating,

@@ -2,6 +2,7 @@
 
 import 'dart:developer';
 import 'package:bloc/bloc.dart';
+import 'package:find_hospital/core/cache/cache.dart';
 import 'package:find_hospital/core/helper/location.dart';
 import 'package:find_hospital/data/models/hospital_model.dart';
 import 'package:geolocator/geolocator.dart';
@@ -47,6 +48,23 @@ class FindHospitalCubit extends Cubit<FindHospitalState> {
           .where((item) => item != null)
           .cast<PlaceInfo>()
           .toList();
+      final List<Map<String, dynamic>> hospitalsCacheData =
+          hospitalsList.map((hospital) {
+        return {
+          'name': hospital.name,
+          'openNow': hospital.openNow,
+          'rate': hospital.rating,
+          'userRatingsTotal': hospital.userRatingsTotal,
+          'lat': hospital.lat,
+          'lng': hospital.lng,
+          'businessStatus': hospital.businessStatus,
+          'placeId': hospital.placeId,
+        };
+      }).toList();
+
+      await CacheData.setListOfMaps(
+          key: 'nearestHospitals', value: hospitalsCacheData);
+      log('Success: Cached nearest hospitals data.');
 
       if (hospitalsList.isEmpty) {
         emit(FindHospitalFailure(message: 'No hospitals found.'));

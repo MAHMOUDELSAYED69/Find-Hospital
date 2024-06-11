@@ -1,4 +1,5 @@
 import 'package:find_hospital/bloc/hospital/find_hospital_cubit.dart';
+import 'package:find_hospital/core/cache/cache.dart';
 import 'package:find_hospital/core/constant/color.dart';
 import 'package:find_hospital/core/constant/routes.dart';
 import 'package:find_hospital/core/helper/scaffold_snackbar.dart';
@@ -21,10 +22,23 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
   void initState() {
     super.initState();
     BlocProvider.of<FindHospitalCubit>(context).getCurrentLocation(context);
+    BlocProvider.of<FindHospitalCubit>(context).getCurrentLocation(context);
+    _loadCachedHospitals();
+  }
+
+  Future<void> _loadCachedHospitals() async {
+    List<Map<String, dynamic>> cachedData =
+        CacheData.getListOfMaps(key: 'nearestHospitals');
+    if (cachedData.isNotEmpty) {
+      setState(() {
+        _cachedHospitalList = cachedData;
+      });
+    }
   }
 
   bool _isLoading = false;
   List<PlaceInfo?> _hospitalList = [];
+  List<Map<String, dynamic>> _cachedHospitalList = [];
   @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<FindHospitalCubit>(context);
@@ -37,7 +51,6 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
             style: TextStyle(
                 fontStyle: FontStyle.italic, fontWeight: FontWeight.w500),
           )),
-      endDrawer: const Drawer(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: ColorManager.red,
         onPressed: () {
@@ -52,13 +65,18 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
       body: BlocConsumer<FindHospitalCubit, FindHospitalState>(
         listener: (context, state) {
           if (state is FindHospitalLoading) {
-            _isLoading = true;
+            setState(() {
+              _isLoading = true;
+            });
           } else if (state is FindHospitalSuccess) {
-            _isLoading = false;
-            _hospitalList = state.hospitalsList;
+            setState(() {
+              _isLoading = false;
+              _hospitalList = state.hospitalsList;
+            });
           } else if (state is FindHospitalFailure) {
-            _isLoading = false;
-
+            setState(() {
+              _isLoading = false;
+            });
             customSnackBar(
                 context, 'There was an error! Please try again later.');
           }
@@ -68,7 +86,9 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
               ? Center(child: _buildLoadingIndicator())
               : Column(
                   children: [
-                    _buildTotalHospital(_hospitalList.length),
+                    _buildTotalHospital(_hospitalList.isNotEmpty
+                        ? _hospitalList.length
+                        : _cachedHospitalList.length),
                     _hospitalList.isNotEmpty
                         ? Expanded(
                             child: ListView.builder(
@@ -84,7 +104,7 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                                           arguments: placeInfo);
                                     },
                                     title:
-                                        Text(_hospitalList[index]?.name ?? ""),
+                                        Text(_hospitalList[index]?.name ?? ''),
                                     subtitle: Text(
                                         _hospitalList[index]?.businessStatus ??
                                             ""),
@@ -95,13 +115,49 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                               },
                             ),
                           )
-                        : const Expanded(
-                            child: Icon(
-                              Icons.find_replace_rounded,
-                              size: 100,
-                              color: ColorManager.red,
-                            ),
-                          ),
+                        : _cachedHospitalList.isNotEmpty
+                            ? Expanded(
+                                child: ListView.builder(
+                                  itemCount: _cachedHospitalList.length,
+                                  itemBuilder: (context, index) {
+                                    final hospital = _cachedHospitalList[index];
+                                    return Card(
+                                      child: ListTile(
+                                        onTap: () {
+                                          Navigator.pushNamed(
+                                            context,
+                                            RouteManager.details,
+                                            arguments: PlaceInfo(
+                                                name: hospital['name'],
+                                                rating: hospital['rate'],
+                                                placeId: hospital['placeId'],
+                                                lat: hospital['lat'],
+                                                lng: hospital['lng'],
+                                                businessStatus:
+                                                    hospital['businessStatus'],
+                                                openNow: hospital['openNow'],
+                                                userRatingsTotal: hospital[
+                                                    'userRatingsTotal']),
+                                          );
+                                        },
+                                        title: Text(hospital['name']),
+                                        subtitle:
+                                            Text('Rating: ${hospital['rate']}'),
+                                        trailing:
+                                            const Icon(Icons.chevron_right),
+                                        leading: const Icon(Icons.healing),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              )
+                            : const Expanded(
+                                child: Icon(
+                                  Icons.find_replace_rounded,
+                                  size: 100,
+                                  color: ColorManager.red,
+                                ),
+                              ),
                   ],
                 );
         },
