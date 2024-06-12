@@ -20,9 +20,7 @@ class FindHospitalCubit extends Cubit<FindHospitalState> {
   Position? location;
 
   Future<void> getCurrentLocation(context) async {
-    while (location == null) {
-      location = await LocationHelper.determineCurrentPosition(context);
-    }
+    location ??= await LocationHelper.determineCurrentPosition(context);
   }
 
   Future<void> getNearestHospitals({double? radius}) async {
