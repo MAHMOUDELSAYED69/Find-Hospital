@@ -44,35 +44,37 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
   @override
   Widget build(BuildContext context) {
     final cubit = context.bloc<FindHospitalCubit>();
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Find Hospital"),
-      ),
-      endDrawer: _endDrawer(),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: context.appBarTheme.backgroundColor,
-        onPressed: () {
-          cubit.getCurrentLocation(context);
-          cubit.getNearestHospitals(radius: selectedDoubleValue);
-        },
-        child: Icon(Icons.location_on, color: context.iconTheme.color),
-      ),
-      body: BlocConsumer<FindHospitalCubit, FindHospitalState>(
-        listener: (context, state) {
-          if (state is FindHospitalLoading) {
-            _isLoading = true;
-          } else if (state is FindHospitalSuccess) {
-            _isLoading = false;
-            _hospitalList = state.hospitalsList;
-          } else if (state is FindHospitalFailure) {
-            _isLoading = false;
+    return BlocConsumer<FindHospitalCubit, FindHospitalState>(
+      listener: (context, state) {
+        if (state is FindHospitalLoading) {
+          _isLoading = true;
+        } else if (state is FindHospitalSuccess) {
+          _isLoading = false;
+          _hospitalList = state.hospitalsList;
+        } else if (state is FindHospitalFailure) {
+          _isLoading = false;
 
-            customSnackBar(
-                context, 'There was an error! Please try again later.');
-          }
-        },
-        builder: (context, state) {
-          return Stack(
+          customSnackBar(
+              context, 'There was an error! Please try again later.');
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text("Find Hospital"),
+          ),
+          endDrawer: _endDrawer(),
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: context.appBarTheme.backgroundColor,
+            onPressed: !_isLoading
+                ? () {
+                    cubit.getCurrentLocation(context);
+                    cubit.getNearestHospitals(radius: selectedDoubleValue);
+                  }
+                : null,
+            child: Icon(Icons.location_on, color: context.iconTheme.color),
+          ),
+          body: Stack(
             children: [
               _isLoading
                   ? Center(child: _buildLoadingIndicator())
@@ -203,9 +205,9 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                       ),
                     )),
             ],
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 

@@ -229,7 +229,7 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                         height: 50.h,
                       ),
                       CustomButton(
-                        width: context.width / 2,
+                        width: context.width / 1.8,
                         title: "Find Hospital",
                         onPressed: () => Navigator.pop(context),
                       )

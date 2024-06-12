@@ -1,6 +1,5 @@
 // ignore_for_file: deprecated_member_use
 
-
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
@@ -74,7 +73,6 @@ class FindHospitalCubit extends Cubit<FindHospitalState> {
       if (hospitalsList.isEmpty) {
         emit(FindHospitalFailure(message: 'No hospitals found.'));
       } else {
-      
         emit(FindHospitalSuccess(hospitalsList: hospitalsList));
         log('Success: Loaded nearest hospitals.');
       }
