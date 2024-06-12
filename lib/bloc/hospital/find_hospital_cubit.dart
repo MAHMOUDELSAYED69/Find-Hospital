@@ -1,6 +1,8 @@
 // ignore_for_file: deprecated_member_use
 
+
 import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:find_hospital/core/cache/cache.dart';
 import 'package:find_hospital/core/helper/location.dart';
@@ -72,14 +74,14 @@ class FindHospitalCubit extends Cubit<FindHospitalState> {
       if (hospitalsList.isEmpty) {
         emit(FindHospitalFailure(message: 'No hospitals found.'));
       } else {
-        log("Loaded nearest hospitals: $hospitalsList");
+      
         emit(FindHospitalSuccess(hospitalsList: hospitalsList));
         log('Success: Loaded nearest hospitals.');
       }
       await CacheData.set(key: 'selectedValue', value: selectedDoubleValue);
-    } catch (e) {
-      log('Error: $e');
-      emit(FindHospitalFailure(message: e.toString()));
+    } catch (err) {
+      log('Error: $err');
+      emit(FindHospitalFailure(message: err.toString()));
     }
   }
 

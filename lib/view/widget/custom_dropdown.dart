@@ -3,6 +3,7 @@ import 'package:find_hospital/core/cache/cache.dart';
 import 'package:find_hospital/core/constant/color.dart';
 import 'package:find_hospital/core/helper/extentions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 double? selectedDoubleValue = CacheData.get(key: 'selectedValue') ?? 1000;
 
@@ -21,11 +22,11 @@ class _MyDropDownMenuButtonState extends State<MyDropDownMenuButton> {
       dropdownStyleData: DropdownStyleData(
           decoration: BoxDecoration(
         color: context.theme.scaffoldBackgroundColor,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
       )),
       barrierColor: ColorManager.red.withOpacity(0.04),
-      menuItemStyleData: const MenuItemStyleData(
-        padding: EdgeInsets.symmetric(horizontal: 5),
+      menuItemStyleData:  MenuItemStyleData(
+        padding: EdgeInsets.symmetric(horizontal: 5.w),
       ),
       isExpanded: false,
       value: selectedDoubleValue,

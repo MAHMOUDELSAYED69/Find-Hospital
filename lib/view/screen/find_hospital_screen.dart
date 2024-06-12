@@ -206,6 +206,7 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
       ),
     );
   }
+
   // ! next
   Widget _endDrawer() {
     return Drawer(
@@ -248,6 +249,9 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
   }
 
   Widget _buildLoadingIndicator() {
-    return LottieBuilder.asset(LottieManager.loading);
+    return Lottie.asset(
+      LottieManager.loading,
+    frameRate: const FrameRate(60)
+    );
   }
 }

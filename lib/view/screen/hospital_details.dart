@@ -49,202 +49,198 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                 }
               },
               builder: (context, state) {
-                return Card(
-                  elevation: 4,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.r),
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.all(16.w),
-                    child: Column(
-                      children: [
-                        SizedBox(height: 8.h),
-                        Text(
-                          widget.hospital?.name ?? 'Unknown Hospital',
-                          textAlign: TextAlign.center,
-                          style: context.textTheme.bodyLarge
-                              ?.copyWith(fontSize: 20.sp),
+                return Container(
+                  padding: EdgeInsets.all(16.w),
+                  child: Column(
+                    children: [
+                      SizedBox(height: 8.h),
+                      Text(
+                        widget.hospital?.name ?? 'Unknown Hospital',
+                        textAlign: TextAlign.center,
+                        style: context.textTheme.bodyLarge
+                            ?.copyWith(fontSize: 20.sp),
+                      ),
+                      SizedBox(height: 8.h),
+                      Text(
+                        cubit.isHospitalOpen(widget.hospital?.openNow),
+                        style: context.textTheme.bodyLarge?.copyWith(
+                          color:
+                              cubit.isHospitalOpen(widget.hospital?.openNow) ==
+                                      "Open Now!"
+                                  ? Colors.green
+                                  : ColorManager.red,
                         ),
-                        SizedBox(height: 8.h),
-                        Text(
-                          cubit.isHospitalOpen(widget.hospital?.openNow),
-                          style: context.textTheme.bodyLarge?.copyWith(
-                            color: cubit.isHospitalOpen(
-                                        widget.hospital?.openNow) ==
-                                    "Open Now!"
-                                ? Colors.green
-                                : ColorManager.red,
+                      ),
+                      Divider(height: 25.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: [
+                              Text(
+                                "Rating",
+                                style: context.textTheme.bodyMedium,
+                              ),
+                              SizedBox(height: 4.h),
+                              Text(
+                                widget.hospital?.rating.toString() ?? "N/A",
+                                style: context.textTheme.bodyMedium?.copyWith(
+                                  color: cubit.ratingChecker(
+                                      rating: widget.hospital?.rating),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        Divider(height: 25.h),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              children: [
-                                Text(
-                                  "Rating",
-                                  style: context.textTheme.bodyMedium,
+                          Column(
+                            children: [
+                              Text(
+                                "Users Ratings Total",
+                                style: context.textTheme.bodyMedium,
+                              ),
+                              SizedBox(height: 4.h),
+                              Text(
+                                '${widget.hospital?.userRatingsTotal ?? 0} Users',
+                                style: context.textTheme.bodyMedium?.copyWith(
+                                  color: cubit.ratingChecker(
+                                      totalRating:
+                                          widget.hospital?.userRatingsTotal),
                                 ),
-                                SizedBox(height: 4.h),
-                                Text(
-                                  widget.hospital?.rating.toString() ?? "N/A",
-                                  style: context.textTheme.bodyMedium?.copyWith(
-                                    color: cubit.ratingChecker(
-                                        rating: widget.hospital?.rating),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  "Users Ratings Total",
-                                  style: context.textTheme.bodyMedium,
-                                ),
-                                SizedBox(height: 4.h),
-                                Text(
-                                  '${widget.hospital?.userRatingsTotal ?? 0} Users',
-                                  style: context.textTheme.bodyMedium?.copyWith(
-                                    color: cubit.ratingChecker(
-                                        totalRating:
-                                            widget.hospital?.userRatingsTotal),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Divider(height: 25.h),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Business Status',
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Divider(height: 25.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Business Status',
+                            style: context.textTheme.bodyMedium,
+                          ),
+                          Text(
+                            '${widget.hospital?.businessStatus}',
+                            style: context.textTheme.bodyMedium
+                                ?.copyWith(color: ColorManager.green),
+                          ),
+                        ],
+                      ),
+                      Divider(height: 25.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              'Coordinates',
                               style: context.textTheme.bodyMedium,
                             ),
-                            Text(
-                              '${widget.hospital?.businessStatus}',
+                          ),
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    "lat: ",
+                                    style:
+                                        context.textTheme.bodyMedium?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SelectableText(
+                                    '${widget.hospital?.lat}',
+                                    style: context.textTheme.bodyMedium
+                                        ?.copyWith(color: ColorManager.green),
+                                  ),
+                                  IconButton(
+                                      onPressed: () => _copyText(
+                                          widget.hospital?.lat.toString()),
+                                      icon: Icon(
+                                        Icons.copy,
+                                        size: 20.spMin,
+                                      ))
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "lng: ",
+                                        style: context.textTheme.bodyMedium
+                                            ?.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SelectableText(
+                                        '${widget.hospital?.lng}',
+                                        style: context.textTheme.bodyMedium
+                                            ?.copyWith(
+                                                color: ColorManager.green),
+                                      ),
+                                      IconButton(
+                                          onPressed: () => _copyText(
+                                              widget.hospital?.lng.toString()),
+                                          icon: Icon(
+                                            Icons.copy,
+                                            size: 20.spMin,
+                                          ))
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Divider(height: 25.h),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              'Place Id',
+                              style: context.textTheme.bodyMedium,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 150,
+                            child: Text(
+                              '${widget.hospital?.placeId}',
                               style: context.textTheme.bodyMedium
                                   ?.copyWith(color: ColorManager.green),
                             ),
-                          ],
-                        ),
-                        Divider(height: 25.h),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                'Coordinates',
-                                style: context.textTheme.bodyMedium,
-                              ),
-                            ),
-                            Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      "lat: ",
-                                      style: context.textTheme.bodyMedium
-                                          ?.copyWith(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    SelectableText(
-                                      '${widget.hospital?.lat}',
-                                      style: context.textTheme.bodyMedium
-                                          ?.copyWith(color: ColorManager.green),
-                                    ),
-                                    IconButton(
-                                        onPressed: () => _copyText(
-                                            widget.hospital?.lat.toString()),
-                                        icon: Icon(
-                                          Icons.copy,
-                                          size: 20.spMin,
-                                        ))
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "lng: ",
-                                          style: context.textTheme.bodyMedium
-                                              ?.copyWith(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        SelectableText(
-                                          '${widget.hospital?.lng}',
-                                          style: context.textTheme.bodyMedium
-                                              ?.copyWith(
-                                                  color: ColorManager.green),
-                                        ),
-                                        IconButton(
-                                            onPressed: () => _copyText(widget
-                                                .hospital?.lng
-                                                .toString()),
-                                            icon: Icon(
-                                              Icons.copy,
-                                              size: 20.spMin,
-                                            ))
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Divider(height: 25.h),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                'Place Id',
-                                style: context.textTheme.bodyMedium,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 150,
-                              child: Text(
-                                '${widget.hospital?.placeId}',
-                                style: context.textTheme.bodyMedium
-                                    ?.copyWith(color: ColorManager.green),
-                              ),
-                            ),
-                            IconButton(
-                                onPressed: () => _copyText(
-                                    widget.hospital?.placeId.toString()),
-                                icon: Icon(
-                                  Icons.copy,
-                                  size: 20.spMin,
-                                ))
-                          ],
-                        ),
-                        Divider(height: 25.h),
-                        CustomButton(
-                          iconData: Icons.map_sharp,
-                          title: "Open In Google Maps",
-                          isLoading: _isloading,
-                          onPressed: () {
-                            cubit.openMaps(
-                                lat: widget.hospital?.lat,
-                                lng: widget.hospital?.lng);
-                          },
-                        )
-                      ],
-                    ),
+                          ),
+                          IconButton(
+                              onPressed: () => _copyText(
+                                  widget.hospital?.placeId.toString()),
+                              icon: Icon(
+                                Icons.copy,
+                                size: 20.spMin,
+                              ))
+                        ],
+                      ),
+                      Divider(height: 30.h),
+                      CustomButton(
+                        iconData: Icons.map_sharp,
+                        title: "Open In Google Maps",
+                        isLoading: _isloading,
+                        onPressed: () {
+                          cubit.openMaps(
+                              lat: widget.hospital?.lat,
+                              lng: widget.hospital?.lng);
+                        },
+                      ),
+                      Divider(
+                        height: 50.h,
+                      ),
+                      CustomButton(
+                        title: "Get Nearest Hospital",
+                        onPressed: () => Navigator.pop(context),
+                      )
+                    ],
                   ),
                 );
               },
             ),
-            CustomButton(
-              title: "Get Nearest Hospital",
-              onPressed: () => Navigator.pop(context),
-            )
           ],
         ),
       ),
