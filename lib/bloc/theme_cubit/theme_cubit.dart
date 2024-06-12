@@ -15,4 +15,8 @@ class ThemeCubit extends Cubit<ThemeState> {
     await CacheData.set(key: 'isRedMode', value: newTheme == ThemeState.green);
     emit(newTheme);
   }
+
+  String themeTitle() {
+    return state == ThemeState.red ? "RED" : "GREEN";
+  }
 }

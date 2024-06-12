@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
+import '../../bloc/theme_cubit/theme_cubit.dart';
 import '../../core/constant/animation.dart';
 import '../../data/models/hospital_model.dart';
 import '../widget/custom_dropdown.dart';
@@ -47,7 +48,7 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
       appBar: AppBar(
         title: const Text("Find Hospital"),
       ),
-      //endDrawer: _endDrawer(),
+      endDrawer: _endDrawer(),
       floatingActionButton: FloatingActionButton(
         backgroundColor: context.appBarTheme.backgroundColor,
         onPressed: () {
@@ -178,7 +179,8 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                                     child: Icon(
                                       Icons.find_replace_rounded,
                                       size: 100.sp,
-                                      color: context.appBarTheme.backgroundColor,
+                                      color:
+                                          context.appBarTheme.backgroundColor,
                                     ),
                                   ),
                       ],
@@ -212,7 +214,45 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
     return Drawer(
       backgroundColor: context.theme.scaffoldBackgroundColor,
       child: Column(
-        children: [],
+        children: [
+          SizedBox(height: 35.h),
+          SizedBox(
+            height: context.height / 4,
+            width: context.width,
+            child: Card(
+              child: Column(
+                children: [
+                  SizedBox(height: 10.h),
+                  BlocBuilder<ThemeCubit, ThemeState>(
+                    builder: (context, state) {
+                      return Card(
+                        margin: EdgeInsets.all(10.w),
+                        color: state == ThemeState.green
+                            ? ColorManager.green
+                            : ColorManager.red,
+                        child: SwitchListTile(
+                          title: Text('Theme Mode',
+                              style: context.textTheme.bodyLarge
+                                  ?.copyWith(fontSize: 14.sp)),
+                          value: state == ThemeState.green,
+                          onChanged: (_) =>
+                              context.bloc<ThemeCubit>().toggleTheme(),
+                        ),
+                      );
+                    },
+                  ),
+                  const Spacer(flex: 2),
+                  Text(
+                    context.bloc<ThemeCubit>().themeTitle(),
+                    style: context.textTheme.displaySmall
+                        ?.copyWith(fontSize: 24.sp),
+                  ),
+                  const Spacer(flex: 3),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -248,9 +288,10 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
   }
 
   Widget _buildLoadingIndicator() {
-    return Lottie.asset(
-      LottieManager.loading,
-    frameRate: const FrameRate(60)
-    );
+    return ColorFiltered(
+        colorFilter: ColorFilter.mode(
+            context.appBarTheme.backgroundColor!, BlendMode.srcATop),
+        child: Lottie.asset(LottieManager.loading,
+            frameRate: const FrameRate(60)));
   }
 }

@@ -6,6 +6,16 @@ abstract class AppTheme {
   //!! RED THEME
   static ThemeData get redTheme {
     return ThemeData(
+      switchTheme: const SwitchThemeData(
+        trackOutlineColor: WidgetStatePropertyAll(ColorManager.black),
+        thumbColor: WidgetStatePropertyAll(ColorManager.red),
+        trackColor: WidgetStatePropertyAll(ColorManager.white),
+        thumbIcon: WidgetStatePropertyAll(Icon(
+          Icons.light_mode,
+          color: ColorManager.white,
+        )),
+      ),
+
       elevatedButtonTheme: const ElevatedButtonThemeData(
         style: ButtonStyle(
           elevation: WidgetStatePropertyAll(3),
@@ -83,6 +93,15 @@ abstract class AppTheme {
   //* Green THEME
   static ThemeData get greenTheme {
     return ThemeData(
+      switchTheme: const SwitchThemeData(
+        trackOutlineColor: WidgetStatePropertyAll(ColorManager.black),
+        thumbColor: WidgetStatePropertyAll(ColorManager.green),
+        trackColor: WidgetStatePropertyAll(ColorManager.white),
+        thumbIcon: WidgetStatePropertyAll(Icon(
+          Icons.auto_awesome_sharp,
+          color: ColorManager.white,
+        )),
+      ),
       elevatedButtonTheme: const ElevatedButtonThemeData(
         style: ButtonStyle(
           elevation: WidgetStatePropertyAll(3),

@@ -1,5 +1,4 @@
 import 'package:find_hospital/core/constant/animation.dart';
-import 'package:find_hospital/core/constant/color.dart';
 import 'package:find_hospital/core/constant/routes.dart';
 import 'package:find_hospital/core/helper/extentions.dart';
 import 'package:flutter/material.dart';
@@ -35,9 +34,14 @@ class _SplashScreenState extends State<SplashScreen> {
         alignment: Alignment.center,
         children: [
           Positioned(
-              bottom: 50.h,
+            bottom: 50.h,
+            child: ColorFiltered(
+              colorFilter: ColorFilter.mode(
+                  context.appBarTheme.backgroundColor!, BlendMode.srcATop),
               child: Lottie.asset(LottieManager.location,
-                  frameRate: const FrameRate(60))),
+                  frameRate: const FrameRate(60)),
+            ),
+          ),
           _buildTitleAndIcon(),
         ],
       ),
