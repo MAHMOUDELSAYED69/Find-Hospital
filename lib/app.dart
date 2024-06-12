@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
                         child: widget!,
                       );
                     },
-                    theme: AppTheme.lightTheme,
+                    theme: AppTheme.greenTheme,
                     debugShowCheckedModeBanner: false,
                     title: 'Find Hospital',
                     initialRoute: RouteManager.splash,

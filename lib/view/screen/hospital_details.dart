@@ -120,8 +120,7 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                           ),
                           Text(
                             '${widget.hospital?.businessStatus}',
-                            style: context.textTheme.bodyMedium
-                                ?.copyWith(color: ColorManager.green),
+                            style: context.textTheme.labelMedium,
                           ),
                         ],
                       ),
@@ -146,18 +145,18 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  SelectableText(
+                                  Text(
                                     '${widget.hospital?.lat}',
-                                    style: context.textTheme.bodyMedium
-                                        ?.copyWith(color: ColorManager.green),
+                                    style: context.textTheme.labelMedium,
                                   ),
                                   IconButton(
-                                      onPressed: () => _copyText(
-                                          widget.hospital?.lat.toString()),
-                                      icon: Icon(
-                                        Icons.copy,
-                                        size: 20.spMin,
-                                      ))
+                                    onPressed: () => _copyText(
+                                        widget.hospital?.lat.toString()),
+                                    icon: Icon(
+                                      Icons.copy,
+                                      size: 20.spMin,
+                                    ),
+                                  )
                                 ],
                               ),
                               Column(
@@ -171,11 +170,9 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      SelectableText(
+                                      Text(
                                         '${widget.hospital?.lng}',
-                                        style: context.textTheme.bodyMedium
-                                            ?.copyWith(
-                                                color: ColorManager.green),
+                                        style: context.textTheme.labelMedium,
                                       ),
                                       IconButton(
                                           onPressed: () => _copyText(
@@ -205,8 +202,7 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                             width: 150,
                             child: Text(
                               '${widget.hospital?.placeId}',
-                              style: context.textTheme.bodyMedium
-                                  ?.copyWith(color: ColorManager.green),
+                              style: context.textTheme.labelMedium,
                             ),
                           ),
                           IconButton(
@@ -233,7 +229,8 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                         height: 50.h,
                       ),
                       CustomButton(
-                        title: "Get Nearest Hospital",
+                        width: context.width / 2,
+                        title: "Find Hospital",
                         onPressed: () => Navigator.pop(context),
                       )
                     ],

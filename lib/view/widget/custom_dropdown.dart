@@ -1,6 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:find_hospital/core/cache/cache.dart';
-import 'package:find_hospital/core/constant/color.dart';
 import 'package:find_hospital/core/helper/extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,12 +19,12 @@ class _MyDropDownMenuButtonState extends State<MyDropDownMenuButton> {
   Widget build(BuildContext context) {
     return DropdownButton2<double>(
       dropdownStyleData: DropdownStyleData(
-          decoration: BoxDecoration(
-        color: context.theme.scaffoldBackgroundColor,
-        borderRadius: BorderRadius.circular(16.r),
-      )),
-      barrierColor: ColorManager.red.withOpacity(0.04),
-      menuItemStyleData:  MenuItemStyleData(
+        decoration: BoxDecoration(
+          color: context.theme.scaffoldBackgroundColor,
+          borderRadius: BorderRadius.circular(16.r),
+        ),
+      ),
+      menuItemStyleData: MenuItemStyleData(
         padding: EdgeInsets.symmetric(horizontal: 5.w),
       ),
       isExpanded: false,
@@ -46,14 +45,12 @@ class _MyDropDownMenuButtonState extends State<MyDropDownMenuButton> {
               Text(
                 value.toString(),
                 textScaler: TextScaler.noScaling,
-                style: context.textTheme.bodySmall
-                    ?.copyWith(color: ColorManager.red),
+                style: context.textTheme.displaySmall,
               ),
               Text(
                 " m",
                 textScaler: TextScaler.noScaling,
-                style: context.textTheme.bodySmall
-                    ?.copyWith(color: ColorManager.red),
+                style: context.textTheme.displaySmall,
               ),
             ],
           ),

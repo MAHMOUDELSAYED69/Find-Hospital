@@ -49,7 +49,7 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
       ),
       //endDrawer: _endDrawer(),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: ColorManager.red,
+        backgroundColor: context.appBarTheme.backgroundColor,
         onPressed: () {
           cubit.getCurrentLocation(context);
           cubit.getNearestHospitals(radius: selectedDoubleValue);
@@ -178,7 +178,7 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                                     child: Icon(
                                       Icons.find_replace_rounded,
                                       size: 100.sp,
-                                      color: ColorManager.red,
+                                      color: context.appBarTheme.backgroundColor,
                                     ),
                                   ),
                       ],
@@ -191,7 +191,7 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                     left: 5.w,
                     bottom: 5.h,
                     child: Card(
-                      color: ColorManager.red,
+                      color: context.appBarTheme.backgroundColor,
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: 12.w, vertical: 5.h),
@@ -235,8 +235,7 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                   ),
                   Text(
                     totalHospital.toString(),
-                    style: context.textTheme.bodyMedium
-                        ?.copyWith(color: ColorManager.red),
+                    style: context.textTheme.displayMedium,
                   ),
                 ],
               ),

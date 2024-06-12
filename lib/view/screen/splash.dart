@@ -36,10 +36,8 @@ class _SplashScreenState extends State<SplashScreen> {
         children: [
           Positioned(
               bottom: 50.h,
-              child: Lottie.asset(
-                LottieManager.location,
-              frameRate: const FrameRate(60)
-              )),
+              child: Lottie.asset(LottieManager.location,
+                  frameRate: const FrameRate(60))),
           _buildTitleAndIcon(),
         ],
       ),
@@ -59,14 +57,14 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
         Text(
           ' Hospital',
-          style: context.textTheme.bodyLarge?.copyWith(
+          style: context.textTheme.displayLarge?.copyWith(
             fontSize: 30.sp,
             fontStyle: FontStyle.italic,
-            color: ColorManager.red,
           ),
         ),
         SizedBox(width: 10.w),
-        Icon(Icons.healing, color: ColorManager.red, size: 30.sp),
+        Icon(Icons.healing,
+            color: context.appBarTheme.backgroundColor, size: 30.sp),
       ],
     );
   }
