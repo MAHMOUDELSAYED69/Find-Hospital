@@ -142,18 +142,18 @@ abstract class AppTheme {
         ),
         labelLarge: TextStyle(
           fontSize: 16.sp,
-          color: Colors.blue,
+          color: ColorManager.blue,
           fontWeight: FontWeight.bold,
         ),
         labelMedium: TextStyle(
           fontSize: 14.sp,
-          color: Colors.blue,
+          color: ColorManager.blue,
           fontWeight: FontWeight.w500,
         ),
         labelSmall: TextStyle(
           fontSize: 12.spMin,
           fontWeight: FontWeight.w500,
-          color: Colors.blue,
+          color: ColorManager.blue,
         ),
       ),
     );

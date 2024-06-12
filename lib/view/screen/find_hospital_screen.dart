@@ -1,4 +1,4 @@
-import 'package:find_hospital/bloc/hospital/find_hospital_cubit.dart';
+import 'package:find_hospital/bloc/hospital_cubit/find_hospital_cubit.dart';
 import 'package:find_hospital/core/cache/cache.dart';
 import 'package:find_hospital/core/constant/color.dart';
 import 'package:find_hospital/core/constant/routes.dart';

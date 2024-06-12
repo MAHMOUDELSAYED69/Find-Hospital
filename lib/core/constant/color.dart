@@ -7,4 +7,5 @@ abstract class ColorManager {
   static const Color white = Color(0xffffffff);
   static const Color grey = Colors.grey;
   static const Color green = Colors.green;
+  static const Color blue = Colors.blue;
 }

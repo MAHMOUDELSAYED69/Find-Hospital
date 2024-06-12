@@ -1,4 +1,4 @@
-import 'package:find_hospital/bloc/hospital/find_hospital_cubit.dart';
+import 'package:find_hospital/bloc/hospital_cubit/find_hospital_cubit.dart';
 import 'package:find_hospital/core/helper/extentions.dart';
 import 'package:find_hospital/core/helper/scaffold_snackbar.dart';
 import 'package:find_hospital/view/widget/custom_button.dart';
