@@ -141,17 +141,42 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                             style: context.textTheme.bodyMedium,
                           ),
                           Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text(
-                                '${widget.hospital?.formattedPhoneNumber}',
-                                style: context.textTheme.labelMedium,
+                              Row(
+                                children: [
+                                  Text(
+                                    '${widget.hospital?.formattedPhoneNumber}',
+                                    style: context.textTheme.labelMedium,
+                                  ),
+                                  IconButton(
+                                    onPressed: () => _copyText(widget
+                                        .hospital?.formattedPhoneNumber
+                                        .toString()),
+                                    icon: Icon(
+                                      Icons.copy,
+                                      size: 20.spMin,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              SizedBox(
-                                height: 5.h,
-                              ),
-                              Text(
-                                '${widget.hospital?.internationalPhoneNumber}',
-                                style: context.textTheme.labelMedium,
+                              SizedBox(height: 5.h),
+                              Row(
+                                children: [
+                                  Text(
+                                    '${widget.hospital?.internationalPhoneNumber}',
+                                    style: context.textTheme.labelMedium,
+                                  ),
+                                  IconButton(
+                                    onPressed: () => _copyText(widget
+                                        .hospital?.internationalPhoneNumber
+                                        .toString()),
+                                    icon: Icon(
+                                      Icons.copy,
+                                      size: 20.spMin,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -203,7 +228,7 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                                         Icons.copy,
                                         size: 20.spMin,
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                                 Column(
