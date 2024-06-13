@@ -1,11 +1,12 @@
-import 'package:find_hospital/bloc/hospital_cubit/find_hospital_cubit.dart';
-import 'package:find_hospital/core/helper/extentions.dart';
-import 'package:find_hospital/core/helper/scaffold_snackbar.dart';
-import 'package:find_hospital/view/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:find_hospital/bloc/hospital_cubit/find_hospital_cubit.dart';
+import 'package:find_hospital/core/helper/extentions.dart';
+import 'package:find_hospital/core/helper/scaffold_snackbar.dart';
+import 'package:find_hospital/view/widget/custom_button.dart';
+import 'package:find_hospital/view/widget/place_photo.dart';
 import '../../core/constant/color.dart';
 import '../../data/models/hospital_model.dart';
 
@@ -24,34 +25,41 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
   }
 
   bool _isloading = false;
+
   @override
   Widget build(BuildContext context) {
-    final cubit = context.bloc<FindHospitalCubit>();
+    final cubit = context.read<FindHospitalCubit>();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Hospital Info"),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            BlocConsumer<FindHospitalCubit, FindHospitalState>(
-              listener: (context, state) {
-                if (state is OpenMapsLoading) {
-                  _isloading = true;
-                }
-                if (state is OpenMapsSuccess) {
-                  _isloading = false;
-                }
-                if (state is OpenMapsFailure) {
-                  _isloading = false;
-                  customSnackBar(context, state.message);
-                }
-              },
-              builder: (context, state) {
-                return Container(
-                  padding: EdgeInsets.all(16.w),
-                  child: Column(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(16.w),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              BlocConsumer<FindHospitalCubit, FindHospitalState>(
+                listener: (context, state) {
+                  if (state is OpenMapsLoading) {
+                    setState(() {
+                      _isloading = true;
+                    });
+                  }
+                  if (state is OpenMapsSuccess) {
+                    setState(() {
+                      _isloading = false;
+                    });
+                  }
+                  if (state is OpenMapsFailure) {
+                    setState(() {
+                      _isloading = false;
+                    });
+                    customSnackBar(context, state.message);
+                  }
+                },
+                builder: (context, state) {
+                  return Column(
                     children: [
                       SizedBox(height: 8.h),
                       Text(
@@ -71,7 +79,7 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                                   : ColorManager.red,
                         ),
                       ),
-                      Divider(height: 25.h),
+                      Divider(height: 20.h),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -110,7 +118,7 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                           ),
                         ],
                       ),
-                      Divider(height: 25.h),
+                      Divider(height: 16.h),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -124,72 +132,113 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                           ),
                         ],
                       ),
-                      Divider(height: 25.h),
+                      Divider(height: 20.h),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
-                            child: Text(
-                              'Coordinates',
-                              style: context.textTheme.bodyMedium,
-                            ),
+                          Text(
+                            'Phone Numbers',
+                            style: context.textTheme.bodyMedium,
                           ),
                           Column(
                             children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    "lat: ",
-                                    style:
-                                        context.textTheme.bodyMedium?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    '${widget.hospital?.lat}',
-                                    style: context.textTheme.labelMedium,
-                                  ),
-                                  IconButton(
-                                    onPressed: () => _copyText(
-                                        widget.hospital?.lat.toString()),
-                                    icon: Icon(
-                                      Icons.copy,
-                                      size: 20.spMin,
-                                    ),
-                                  )
-                                ],
+                              Text(
+                                '${widget.hospital?.formattedPhoneNumber}',
+                                style: context.textTheme.labelMedium,
                               ),
-                              Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "lng: ",
-                                        style: context.textTheme.bodyMedium
-                                            ?.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Text(
-                                        '${widget.hospital?.lng}',
-                                        style: context.textTheme.labelMedium,
-                                      ),
-                                      IconButton(
-                                          onPressed: () => _copyText(
-                                              widget.hospital?.lng.toString()),
-                                          icon: Icon(
-                                            Icons.copy,
-                                            size: 20.spMin,
-                                          ))
-                                    ],
-                                  ),
-                                ],
+                              SizedBox(
+                                height: 5.h,
+                              ),
+                              Text(
+                                '${widget.hospital?.internationalPhoneNumber}',
+                                style: context.textTheme.labelMedium,
                               ),
                             ],
                           ),
                         ],
                       ),
-                      Divider(height: 25.h),
+                      if (widget.hospital?.photos != null)
+                        Divider(height: 20.h),
+                      if (widget.hospital?.photos != null)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Image',
+                              style: context.textTheme.bodyMedium,
+                            ),
+                            PlacePhotoWidget(placeInfo: widget.hospital!)
+                          ],
+                        ),
+                      Offstage(
+                        offstage: true,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                'Coordinates',
+                                style: context.textTheme.bodyMedium,
+                              ),
+                            ),
+                            Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      "lat: ",
+                                      style: context.textTheme.bodyMedium
+                                          ?.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      '${widget.hospital?.lat}',
+                                      style: context.textTheme.labelMedium,
+                                    ),
+                                    IconButton(
+                                      onPressed: () => _copyText(
+                                          widget.hospital?.lat.toString()),
+                                      icon: Icon(
+                                        Icons.copy,
+                                        size: 20.spMin,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "lng: ",
+                                          style: context.textTheme.bodyMedium
+                                              ?.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Text(
+                                          '${widget.hospital?.lng}',
+                                          style: context.textTheme.labelMedium,
+                                        ),
+                                        IconButton(
+                                            onPressed: () => _copyText(widget
+                                                .hospital?.lng
+                                                .toString()),
+                                            icon: Icon(
+                                              Icons.copy,
+                                              size: 20.spMin,
+                                            ))
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Divider(height: 20.h),
                       Row(
                         children: [
                           Expanded(
@@ -214,7 +263,7 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                               ))
                         ],
                       ),
-                      Divider(height: 30.h),
+                      Divider(height: 25.h),
                       CustomButton(
                         iconData: Icons.map_sharp,
                         title: "Open In Google Maps",
@@ -226,7 +275,7 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                         },
                       ),
                       Divider(
-                        height: 50.h,
+                        height: 25.h,
                       ),
                       CustomButton(
                         width: context.width / 1.8,
@@ -234,11 +283,11 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                         onPressed: () => Navigator.pop(context),
                       )
                     ],
-                  ),
-                );
-              },
-            ),
-          ],
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -33,24 +33,12 @@ class FindHospitalCubit extends Cubit<FindHospitalState> {
       log('Loading nearest hospitals...');
       emit(FindHospitalLoading());
 
-      final List<Map<String, dynamic>> hospitalsData =
+      final List<PlaceInfo> hospitalsData =
           await FindHospitalWebService.getNearestHospital(
               location!.latitude, location!.longitude, radius);
 
-      final List<PlaceInfo> hospitalsList = hospitalsData
-          .map((item) {
-            try {
-              return PlaceInfo.fromJson(item);
-            } catch (err) {
-              log('Error parsing item: $item, error: $err');
-              return null;
-            }
-          })
-          .where((item) => item != null)
-          .cast<PlaceInfo>()
-          .toList();
       final List<Map<String, dynamic>> hospitalsCacheData =
-          hospitalsList.map((hospital) {
+          hospitalsData.map((hospital) {
         return {
           'name': hospital.name,
           'openNow': hospital.openNow,
@@ -60,6 +48,10 @@ class FindHospitalCubit extends Cubit<FindHospitalState> {
           'lng': hospital.lng,
           'businessStatus': hospital.businessStatus,
           'placeId': hospital.placeId,
+          'formattedPhoneNumber': hospital.formattedPhoneNumber,
+          'internationalPhoneNumber': hospital.internationalPhoneNumber,
+          'photos': hospital.photos,
+          
         };
       }).toList();
 
@@ -68,10 +60,10 @@ class FindHospitalCubit extends Cubit<FindHospitalState> {
           key: 'nearestHospitals', value: hospitalsCacheData);
       log('Success: Cached nearest hospitals data.');
 
-      if (hospitalsList.isEmpty) {
+      if (hospitalsData.isEmpty) {
         emit(FindHospitalFailure(message: 'No hospitals found.'));
       } else {
-        emit(FindHospitalSuccess(hospitalsList: hospitalsList));
+        emit(FindHospitalSuccess(hospitalsList: hospitalsData));
         log('Success: Loaded nearest hospitals.');
       }
       await CacheData.set(key: 'selectedValue', value: selectedDoubleValue);

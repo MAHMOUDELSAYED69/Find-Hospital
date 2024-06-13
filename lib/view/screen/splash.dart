@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     goToNextScreen();
   }
-
+ 
   Future<void> goToNextScreen() async =>
       Future.delayed(const Duration(milliseconds: 3300), () {
         Navigator.pushReplacementNamed(context, RouteManager.home);
@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
               colorFilter: ColorFilter.mode(
                   context.appBarTheme.backgroundColor!, BlendMode.srcATop),
               child: Lottie.asset(LottieManager.location,
-                  frameRate: const FrameRate(60)),
+                  frameRate:  FrameRate.max),
             ),
           ),
           _buildTitleAndIcon(),

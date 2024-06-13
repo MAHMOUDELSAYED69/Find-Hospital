@@ -7,14 +7,14 @@ class LocationHelper {
     bool serviceEnabled;
     LocationPermission permission;
 
-    // Check if location services are enabled
+    //* Check if location services are enabled
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       log('Location services are disabled.');
       customSnackBar(context, "Location services are disabled.");
     }
 
-    // Check for location permissions
+    //* Check for location permissions
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
@@ -29,14 +29,14 @@ class LocationHelper {
       customSnackBar(context, "Location permissions are permanently denied.");
     }
 
-    // Try to get the last known position first for faster feedback
+    //* Try to get the last known position first for faster feedback
     Position? lastKnownPosition = await Geolocator.getLastKnownPosition();
     if (lastKnownPosition != null) {
       log('Using last known position: ${lastKnownPosition.latitude}, ${lastKnownPosition.longitude}');
       return lastKnownPosition;
     }
 
-    // If no last known position is available, get the current position
+    //* If no last known position is available, get the current position
     try {
       Position currentPosition = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
@@ -50,4 +50,3 @@ class LocationHelper {
     }
   }
 }
-

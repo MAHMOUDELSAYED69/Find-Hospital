@@ -134,18 +134,22 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                                                 context,
                                                 RouteManager.details,
                                                 arguments: PlaceInfo(
-                                                    name: hospital['name'],
-                                                    rating: hospital['rate'],
-                                                    placeId:
-                                                        hospital['placeId'],
-                                                    lat: hospital['lat'],
-                                                    lng: hospital['lng'],
-                                                    businessStatus: hospital[
-                                                        'businessStatus'],
-                                                    openNow:
-                                                        hospital['openNow'],
-                                                    userRatingsTotal: hospital[
-                                                        'userRatingsTotal']),
+                                                  name: hospital['name'],
+                                                  rating: hospital['rate'],
+                                                  placeId: hospital['placeId'],
+                                                  lat: hospital['lat'],
+                                                  lng: hospital['lng'],
+                                                  businessStatus: hospital[
+                                                      'businessStatus'],
+                                                  openNow: hospital['openNow'],
+                                                  userRatingsTotal: hospital[
+                                                      'userRatingsTotal'],
+                                                  formattedPhoneNumber: hospital[
+                                                      'formattedPhoneNumber'],
+                                                  internationalPhoneNumber:
+                                                      hospital[
+                                                          'internationalPhoneNumber'],
+                                                ),
                                               );
                                             },
                                             title: Text(hospital['name'],
@@ -201,7 +205,7 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                             horizontal: 12.w, vertical: 5.h),
                         child: Text(
                             "Last Updated: ${CacheData.getLastUpdatedTime('LastUpdated')}",
-                            style: context.textTheme.bodyMedium),
+                            style: context.textTheme.bodySmall),
                       ),
                     )),
             ],
@@ -211,13 +215,12 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
     );
   }
 
-  // ! next
   Widget _endDrawer() {
     return Drawer(
       backgroundColor: context.theme.scaffoldBackgroundColor,
       child: Column(
         children: [
-          SizedBox(height: 35.h),
+          SizedBox(height: 30.h),
           SizedBox(
             height: context.height / 4,
             width: context.width,
@@ -293,7 +296,6 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
     return ColorFiltered(
         colorFilter: ColorFilter.mode(
             context.appBarTheme.backgroundColor!, BlendMode.srcATop),
-        child: Lottie.asset(LottieManager.loading,
-            frameRate: const FrameRate(60)));
+        child: Lottie.asset(LottieManager.loading, frameRate: FrameRate.max));
   }
 }

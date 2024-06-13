@@ -1,3 +1,5 @@
+import '../../core/constant/api_url.dart';
+
 class PlaceInfo {
   final String businessStatus;
   final double lat;
@@ -21,6 +23,14 @@ class PlaceInfo {
   final List<Map<String, dynamic>>? photos;
   final double? rating;
   final int? userRatingsTotal;
+  final String? formattedPhoneNumber;
+  final String? internationalPhoneNumber;
+  final String? website;
+  final List<Map<String, dynamic>>? addressComponents;
+  final String? formattedAddress;
+  final int? utcOffset;
+  final String? url;
+  final String? adrAddress;
 
   PlaceInfo({
     required this.businessStatus,
@@ -45,6 +55,14 @@ class PlaceInfo {
     this.photos,
     this.rating,
     this.userRatingsTotal,
+    this.formattedPhoneNumber,
+    this.internationalPhoneNumber,
+    this.website,
+    this.addressComponents,
+    this.formattedAddress,
+    this.utcOffset,
+    this.url,
+    this.adrAddress,
   });
 
   factory PlaceInfo.fromJson(Map<String, dynamic> json) {
@@ -56,6 +74,7 @@ class PlaceInfo {
     var openingHours = json['opening_hours'] ?? {};
     var photoList = json['photos'] as List? ?? [];
     var plusCode = json['plus_code'] ?? {};
+    var addressComponentsList = json['address_components'] as List? ?? [];
 
     return PlaceInfo(
       businessStatus: json['business_status'] ?? 'UNKNOWN',
@@ -88,6 +107,25 @@ class PlaceInfo {
           .toList(),
       rating: (json['rating'] ?? 0.0).toDouble(),
       userRatingsTotal: json['user_ratings_total'] ?? 0,
+      formattedPhoneNumber: json['formatted_phone_number'] ?? '',
+      internationalPhoneNumber: json['international_phone_number'] ?? '',
+      website: json['website'] ?? '',
+      addressComponents: addressComponentsList
+          .map((component) => {
+                'long_name': component['long_name'] ?? '',
+                'short_name': component['short_name'] ?? '',
+                'types': List<String>.from(component['types'] ?? []),
+              })
+          .toList(),
+      formattedAddress: json['formatted_address'] ?? '',
+      utcOffset: json['utc_offset'] ?? 0,
+      url: json['url'] ?? '',
+      adrAddress: json['adr_address'] ?? '',
     );
+  }
+
+  // Method to get photo URL
+  String getPhotoUrl(String photoReference, {int maxWidth = 400, int maxHeight = 400}) {
+    return 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=$maxWidth&maxheight=$maxHeight&photoreference=$photoReference&key=${ApiUrlManager.googleMap}';
   }
 }
