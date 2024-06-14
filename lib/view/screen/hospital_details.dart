@@ -132,64 +132,69 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                           ),
                         ],
                       ),
-                      Divider(height: 20.h),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Phone Numbers',
-                            style: context.textTheme.bodyMedium,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    '${widget.hospital?.formattedPhoneNumber}',
-                                    style: context.textTheme.labelMedium,
-                                  ),
-                                  IconButton(
-                                    onPressed: () => _copyText(widget
-                                        .hospital?.formattedPhoneNumber
-                                        .toString()),
-                                    icon: Icon(
-                                      Icons.copy,
-                                      size: 20.spMin,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 5.h),
-                              Row(
-                                children: [
-                                  Text(
-                                    '${widget.hospital?.internationalPhoneNumber}',
-                                    style: context.textTheme.labelMedium,
-                                  ),
-                                  IconButton(
-                                    onPressed: () => _copyText(widget
-                                        .hospital?.internationalPhoneNumber
-                                        .toString()),
-                                    icon: Icon(
-                                      Icons.copy,
-                                      size: 20.spMin,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      if (widget.hospital?.photos != null)
+                      if (widget.hospital!.formattedPhoneNumber != null &&
+                          widget.hospital!.internationalPhoneNumber!.isNotEmpty)
                         Divider(height: 20.h),
-                      if (widget.hospital?.photos != null)
+                      if (widget.hospital!.formattedPhoneNumber != null &&
+                          widget.hospital!.internationalPhoneNumber!.isNotEmpty)
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Image',
+                              'Phone Numbers',
+                              style: context.textTheme.bodyMedium,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      '${widget.hospital?.formattedPhoneNumber}',
+                                      style: context.textTheme.labelMedium,
+                                    ),
+                                    IconButton(
+                                      onPressed: () => _copyText(widget
+                                          .hospital?.formattedPhoneNumber
+                                          .toString()),
+                                      icon: Icon(
+                                        Icons.copy,
+                                        size: 20.spMin,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      '${widget.hospital?.internationalPhoneNumber}',
+                                      style: context.textTheme.labelMedium,
+                                    ),
+                                    IconButton(
+                                      onPressed: () => _copyText(widget
+                                          .hospital?.internationalPhoneNumber
+                                          .toString()),
+                                      icon: Icon(
+                                        Icons.copy,
+                                        size: 20.spMin,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      if (widget.hospital!.photos != null &&
+                          widget.hospital!.photos!.isNotEmpty)
+                        Divider(height: 20.h),
+                      if (widget.hospital!.photos != null &&
+                          widget.hospital!.photos!.isNotEmpty)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Images',
                               style: context.textTheme.bodyMedium,
                             ),
                             PlacePhotoWidget(placeInfo: widget.hospital!)
