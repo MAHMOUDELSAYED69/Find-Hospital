@@ -144,6 +144,13 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                                                   openNow: hospital['openNow'],
                                                   userRatingsTotal: hospital[
                                                       'userRatingsTotal'],
+                                                  photos: hospital['photos'] !=
+                                                          null
+                                                      ? List<
+                                                              Map<String,
+                                                                  dynamic>>.from(
+                                                          hospital['photos'])
+                                                      : null,
                                                   formattedPhoneNumber: hospital[
                                                       'formattedPhoneNumber'],
                                                   internationalPhoneNumber:

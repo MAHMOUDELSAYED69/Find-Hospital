@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import '../../core/constant/animation.dart';
-import '../../data/models/hospital_model.dart';
+import '../../core/constant/api_url.dart';
 
 class PlacePhotoWidget extends StatefulWidget {
-  const PlacePhotoWidget({super.key, required this.placeInfo});
-  final PlaceInfo placeInfo;
+  const PlacePhotoWidget({super.key, required this.photoList});
+  final List<Map<String, dynamic>>? photoList;
 
   @override
   PlacePhotoWidgetState createState() => PlacePhotoWidgetState();
@@ -22,8 +22,7 @@ class PlacePhotoWidgetState extends State<PlacePhotoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.placeInfo.photos != null &&
-        widget.placeInfo.photos!.isNotEmpty) {
+    if (widget.photoList!.isNotEmpty && widget.photoList != null) {
       return SizedBox(
         width: context.width / 1.5,
         height: context.height / 3,
@@ -34,7 +33,7 @@ class PlacePhotoWidgetState extends State<PlacePhotoWidget> {
             child: Stack(
               children: [
                 PageView.builder(
-                  itemCount: widget.placeInfo.photos!.length,
+                  itemCount: widget.photoList!.length,
                   onPageChanged: (index) {
                     setState(() {
                       _currentPage = index;
@@ -42,9 +41,10 @@ class PlacePhotoWidgetState extends State<PlacePhotoWidget> {
                   },
                   itemBuilder: (context, index) {
                     String photoReference =
-                        widget.placeInfo.photos![index]['photo_reference'];
+                        widget.photoList![index]['photo_reference'];
                     String photoUrl =
-                        widget.placeInfo.getPhotoUrl(photoReference);
+                        'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=$photoReference&key=${ApiUrlManager.googleMap}';
+
                     log(photoUrl);
                     return CachedNetworkImage(
                       fit: BoxFit.fill,
@@ -72,7 +72,7 @@ class PlacePhotoWidgetState extends State<PlacePhotoWidget> {
                       borderRadius: BorderRadius.circular(10.r),
                     ),
                     child: Text(
-                      '${_currentPage + 1} / ${widget.placeInfo.photos!.length}',
+                      '${_currentPage + 1} / ${widget.photoList!.length}',
                       style: TextStyle(
                         color: ColorManager.white,
                         fontSize: 12.sp,

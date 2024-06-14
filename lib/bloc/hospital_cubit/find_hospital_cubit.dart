@@ -51,7 +51,6 @@ class FindHospitalCubit extends Cubit<FindHospitalState> {
           'formattedPhoneNumber': hospital.formattedPhoneNumber,
           'internationalPhoneNumber': hospital.internationalPhoneNumber,
           'photos': hospital.photos,
-          
         };
       }).toList();
 

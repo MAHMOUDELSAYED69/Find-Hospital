@@ -104,7 +104,7 @@ class PlaceInfo {
                 'photo_reference': photo['photo_reference'] ?? '',
                 'width': photo['width'] ?? 0,
               })
-          .toList(),
+          .toList() as  List<Map<String, dynamic>>?,
       rating: (json['rating'] ?? 0.0).toDouble(),
       userRatingsTotal: json['user_ratings_total'] ?? 0,
       formattedPhoneNumber: json['formatted_phone_number'] ?? '',

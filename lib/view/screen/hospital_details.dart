@@ -197,7 +197,7 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                               'Images',
                               style: context.textTheme.bodyMedium,
                             ),
-                            PlacePhotoWidget(placeInfo: widget.hospital!)
+                            PlacePhotoWidget(photoList: widget.hospital!.photos)
                           ],
                         ),
                       Offstage(
