@@ -118,7 +118,7 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                           ),
                         ],
                       ),
-                      Divider(height: 16.h),
+                      Divider(height: 20.h),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -128,6 +128,34 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                           ),
                           Text(
                             '${widget.hospital?.businessStatus}',
+                            style: context.textTheme.labelMedium,
+                          ),
+                        ],
+                      ),
+                      Divider(height: 20.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'distance',
+                            style: context.textTheme.bodyMedium,
+                          ),
+                          Text(
+                            '${widget.hospital?.distance}',
+                            style: context.textTheme.labelMedium,
+                          ),
+                        ],
+                      ),
+                      Divider(height: 20.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'duration(car)',
+                            style: context.textTheme.bodyMedium,
+                          ),
+                          Text(
+                            '${widget.hospital?.duration}',
                             style: context.textTheme.labelMedium,
                           ),
                         ],

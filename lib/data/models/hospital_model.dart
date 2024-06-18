@@ -1,4 +1,3 @@
-import '../../core/constant/api_url.dart';
 
 class PlaceInfo {
   final String businessStatus;
@@ -31,6 +30,8 @@ class PlaceInfo {
   final int? utcOffset;
   final String? url;
   final String? adrAddress;
+  final String? distance; // New field for distance
+  final String? duration; // New field for duration
 
   PlaceInfo({
     required this.businessStatus,
@@ -63,6 +64,8 @@ class PlaceInfo {
     this.utcOffset,
     this.url,
     this.adrAddress,
+    this.distance, // Initialize new field
+    this.duration, // Initialize new field
   });
 
   factory PlaceInfo.fromJson(Map<String, dynamic> json) {
@@ -104,7 +107,7 @@ class PlaceInfo {
                 'photo_reference': photo['photo_reference'] ?? '',
                 'width': photo['width'] ?? 0,
               })
-          .toList() as  List<Map<String, dynamic>>?,
+          .toList() as List<Map<String, dynamic>>?,
       rating: (json['rating'] ?? 0.0).toDouble(),
       userRatingsTotal: json['user_ratings_total'] ?? 0,
       formattedPhoneNumber: json['formatted_phone_number'] ?? '',
@@ -121,11 +124,8 @@ class PlaceInfo {
       utcOffset: json['utc_offset'] ?? 0,
       url: json['url'] ?? '',
       adrAddress: json['adr_address'] ?? '',
+      distance: json['distance'] ?? '', // Parse new field
+      duration: json['duration'] ?? '', // Parse new field
     );
-  }
-
-  // Method to get photo URL
-  String getPhotoUrl(String photoReference, {int maxWidth = 400, int maxHeight = 400}) {
-    return 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=$maxWidth&maxheight=$maxHeight&photoreference=$photoReference&key=${ApiUrlManager.googleMap}';
   }
 }

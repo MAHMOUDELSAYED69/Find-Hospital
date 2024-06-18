@@ -1,5 +1,6 @@
 import 'package:find_hospital/bloc/hospital_cubit/find_hospital_cubit.dart';
 import 'package:find_hospital/core/cache/cache.dart';
+import 'package:find_hospital/core/constant/api_url.dart';
 import 'package:find_hospital/core/constant/color.dart';
 import 'package:find_hospital/core/constant/routes.dart';
 import 'package:find_hospital/core/helper/extentions.dart';
@@ -156,6 +157,10 @@ class _FindHospitalScreenState extends State<FindHospitalScreen> {
                                                   internationalPhoneNumber:
                                                       hospital[
                                                           'internationalPhoneNumber'],
+                                                  distance:
+                                                      hospital['distance'],
+                                                  duration:
+                                                      hospital['duration'],
                                                 ),
                                               );
                                             },
