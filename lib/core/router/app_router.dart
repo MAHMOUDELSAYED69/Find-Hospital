@@ -17,7 +17,7 @@ abstract class AppRouter {
         return PageTransitionManager.fadeTransition(const FindHospitalScreen());
       case RouteManager.details:
         {
-          final args = settings.arguments as PlaceInfo?;
+          final args = settings.arguments as HospitalsPlaceInfo?;
           return PageTransitionManager.materialSlideTransition(
               HospitalDetailScreen(hospital: args));
         }

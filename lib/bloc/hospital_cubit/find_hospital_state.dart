@@ -8,7 +8,7 @@ class FindHospitalInitial extends FindHospitalState {}
 class FindHospitalLoading extends FindHospitalState {}
 
 class FindHospitalSuccess extends FindHospitalState {
-  final List<PlaceInfo?> hospitalsList;
+  final List<HospitalsPlaceInfo?> hospitalsList;
 
   FindHospitalSuccess({required this.hospitalsList});
 }

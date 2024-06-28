@@ -4,13 +4,14 @@ import 'package:find_hospital/core/constant/api_url.dart';
 import 'package:uuid/uuid.dart';
 import '../models/hospital_model.dart';
 
+//?----------------------------------------------------------- Find Hospitals Web Service
 class FindHospitalWebService {
   static final Dio dio = Dio();
-
-  static Future<List<PlaceInfo>> getNearestHospital(
+//?-------------------------------------------------------------- Get Nearest Hospital Method
+  static Future<List<HospitalsPlaceInfo>> getNearestHospital(
       double latitude, double longitude, double? radius) async {
     final String sessionToken = const Uuid().v4();
-    List<PlaceInfo> hospitals = [];
+    List<HospitalsPlaceInfo> hospitals = [];
     String? nextPageToken;
 
     do {
@@ -53,7 +54,8 @@ class FindHospitalWebService {
     return hospitals;
   }
 
-  static Future<PlaceInfo?> _getPlaceDetails(
+//?-------------------------------------------------------------- Get Place Details Method
+  static Future<HospitalsPlaceInfo?> _getPlaceDetails(
       String placeId, double originLat, double originLng) async {
     log('call _getPlaceDetails');
     try {
@@ -71,7 +73,7 @@ class FindHospitalWebService {
         placeDetails['geometry']['location']['lng'],
       );
 
-      return PlaceInfo.fromJson({
+      return HospitalsPlaceInfo.fromJson({
         ...placeDetails,
         'distance': distanceAndDuration['distance'],
         'duration': distanceAndDuration['duration'],
@@ -82,6 +84,7 @@ class FindHospitalWebService {
     }
   }
 
+//?-------------------------------------------------------------- Get Distance And Duration Method
   static Future<Map<String, String>> _getDistanceAndDuration(double originLat,
       double originLng, double destLat, double destLng) async {
     log('call _getDistanceAndDuration');

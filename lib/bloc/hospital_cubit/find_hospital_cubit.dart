@@ -33,7 +33,7 @@ class FindHospitalCubit extends Cubit<FindHospitalState> {
       log('Loading nearest hospitals...');
       emit(FindHospitalLoading());
 
-      final List<PlaceInfo> hospitalsData =
+      final List<HospitalsPlaceInfo> hospitalsData =
           await FindHospitalWebService.getNearestHospital(
               location!.latitude, location!.longitude, radius);
 
