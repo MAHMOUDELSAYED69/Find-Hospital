@@ -64,10 +64,7 @@ class CachedHospitalsListViewBuilder extends StatelessWidget {
                 ],
               ),
               trailing: const Icon(Icons.chevron_right),
-              leading: Icon(
-                Icons.emergency,
-                color: context.appBarTheme.backgroundColor,
-              ),
+              leading: const Icon(Icons.emergency),
             ),
           );
         },

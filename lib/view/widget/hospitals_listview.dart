@@ -1,4 +1,3 @@
-
 import 'package:find_hospital/core/helper/extentions.dart';
 import 'package:flutter/material.dart';
 
@@ -42,7 +41,7 @@ class HopitalsListViewBuilder extends StatelessWidget {
                         : ColorManager.red),
               ),
               trailing: const Icon(Icons.chevron_right),
-              leading: const Icon(Icons.healing),
+              leading:  const Icon(Icons.emergency),
             ),
           );
         },
