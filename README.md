@@ -2,24 +2,22 @@
 Find Hospital is a Flutter application designed to help users locate the nearest hospitals around them. The app provides detailed information about hospitals, including their name, current open status, business status, rating, total user ratings, phone number, and place ID. Users can also view the hospital location on Google Maps. The app offers two theme modes: green and red. Additionally, it saves the last updated hospital data in the app.
 
 ## Features
-`Nearest Hospitals:` Get a list of the nearest hospitals based on your current location.
+1. **`Nearest Hospitals:`** Get a list of the nearest hospitals based on your current location.
+2. **`Hospital Details:`** View detailed information about each hospital, including:
 
-`Hospital Details:` View detailed information about each hospital, including:
-`Name`
-`Open Now status`
-`Business status`
-`Rating`
-`Total user ratings`
-`Distances`
-`Duration`
-`Phone number`
+   `Name`,
+`Open Now status`,
+`Business status`,
+`Rating`,
+`Total user ratings`,
+`Distances`,
+`Duration`,
+`Phone number`,
 `Place ID`
 
-`Google Maps Integration:` Open hospital locations directly in Google Maps.
-
-`Theme Modes:` Switch between green and red theme modes for a personalized experience.
-
-`Data Persistence:` The app saves the last updated hospital data for future reference.
+3. **`Google Maps Integration:`** Open hospital locations directly in Google Maps.
+4. **`Theme Modes:`** Switch between green and red theme modes for a personalized experience.
+5. **`Data Persistence:`** The app saves the last updated hospital data for future reference.
 
 ## Screenshots
 <div style="display: flex; justify-content: space-between;">
@@ -39,24 +37,24 @@ Find Hospital is a Flutter application designed to help users locate the nearest
 
 To get started with the Find Hospital mobile application, follow these steps:
 
-`Step 1:` Clone the Repository
+**`Step 1:`** Clone the Repository
 First, you'll need to clone the repository from GitHub. Open your terminal and run the following command:
 ```
-https://github.com/MAHMOUDELSAYED69/Find-Hospital
+https://github.com/MAHMOUDELSAYED69/Find-Hospital.git
 ```
 Replace <repository-url> with the actual URL of your repository if it was changed.
 
-`Step 2:` Install Dependencies
+**`Step 2:`** Install Dependencies
 After navigating to the project directory, you need to install all the necessary dependencies. Run:
 ```
 flutter pub get
 ```
 This command fetches all the dependencies listed in the `pubspec.yaml` file.
 
-`Step 3:` Configure the App
+**`Step 3:`** Configure the App
 Ensure all necessary configurations are done. This includes adding your assets and setting up environment variables if needed. Verify that your `pubspec.yaml` file includes all required `assets` and `fonts`.
 
-`Step 4:` Run the Application
+**`Step 4:`** Run the Application
 Finally, run the application on your desired device using the following command:
 `
 ```
@@ -65,7 +63,7 @@ flutter run
 This command compiles your Flutter app and deploys it to the connected device or simulator.
 
 Additional Tips
-`Updating Dependencies:` If there are any updates to the dependencies, you can update them using:
+**`Updating Dependencies:`** If there are any updates to the dependencies, you can update them using:
 ```
 flutter pub upgrade --major-versions
 ```
@@ -78,52 +76,50 @@ This command checks your environment and displays a report of the status of your
 By following these steps, you'll have the Find Hospital app and running on your device, ready to Find the Hospitals around you. If you encounter any issues during installation, please refer to the Flutter documentation.
 
 ## Usage
-`Grant Location Permissions:` Ensure the app has permission to access your location.
+**`Grant Location Permissions:`** Ensure the app has permission to access your location.
 
-`Find Hospitals:` The app will automatically display the nearest hospitals around you.
+**`Find Hospitals:`** The app will automatically display the nearest hospitals around you.
 
-`View Details:` Tap on any hospital to view detailed information.
+**`View Details:`** Tap on any hospital to view detailed information.
 
-`Open in Google Maps:` Click on the Google Maps icon to open the hospital's location in Google Maps.
+**`Open in Google Maps:`** Click on the Google Maps icon to open the hospital's location in Google Maps.
 
-`Switch Themes:` Use the theme switcher to toggle between green and red modes.
+**`Switch Themes:`** Use the theme switcher to toggle between green and red modes.
 
-`Save Data:` The app automatically saves the last updated hospital data.
+**`Save Data:`** The app automatically saves the last updated hospital data.
 
 ## Dependencies
 This project uses the following Flutter packages:
 
 This project uses the following Flutter packages:
 
-`bloc: ^8.1.4:` State management library.
+**`bloc:`** State management library.
 
-`cached_network_image: ^3.3.1:` Load and cache network images.
+**`cached_network_image:`** Load and cache network images.
 
-`dio: ^5.4.3+1:` HTTP client for Dart.
+**`dio:`** HTTP client for Dart.
 
-`dropdown_button2: ^2.3.9:` Customizable dropdown buttons.
+**`dropdown_button2:`** Customizable dropdown buttons.
 
-`flutter: sdk:` flutter: Flutter framework.
+**`flutter_bloc:`** BLoC design pattern.
 
-`flutter_bloc: ^8.1.5:` BLoC design pattern.
+**`flutter_dotenv:`** Load environment variables.
 
-`flutter_dotenv: ^5.1.0:` Load environment variables.
+**`flutter_screenutil:`** Screen size adaptation.
 
-`flutter_screenutil: ^5.9.3:` Screen size adaptation.
+**`geolocator:`** Access device location.
 
-`geolocator: ^12.0.0:` Access device location.
+**`intl:`** Internationalization and localization.
 
-`intl: ^0.19.0:` Internationalization and localization.
+**`lottie:`** Render Adobe After Effects animations.
 
-`lottie: ^3.1.0:` Render Adobe After Effects animations.
+**`meta:`** Dart analyzer annotations.
 
-`meta: ^1.11.0:` Dart analyzer annotations.
+**`shared_preferences:`** Manage application preferences.
 
-`shared_preferences:` ^2.2.3: Manage application preferences.
+**`url_launcher:`** Launch URLs in mobile platform.
 
-`url_launcher: ^6.3.0:` Launch URLs in mobile platform.
-
-`uuid: ^4.4.0:` Generate unique identifiers.
+**`uuid:`** Generate unique identifiers.
 
 Ensure these dependencies are added to your pubspec.yaml file.e.
 
