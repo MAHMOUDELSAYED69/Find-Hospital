@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:geolocator/geolocator.dart';
-import 'package:find_hospital/core/helper/scaffold_snackbar.dart';
+import 'package:find_hospital/utils/helper/scaffold_snackbar.dart';
 
 class LocationHelper {
   static Future<Position?> determineCurrentPosition(context) async {

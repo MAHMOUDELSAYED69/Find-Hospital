@@ -1,4 +1,4 @@
-import 'package:find_hospital/core/constant/color.dart';
+import 'package:find_hospital/utils/constant/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

@@ -1,9 +1,9 @@
-import 'package:find_hospital/core/helper/extentions.dart';
+import 'package:find_hospital/utils/helper/extentions.dart';
 import 'package:flutter/material.dart';
 
 import '../../bloc/hospital_cubit/find_hospital_cubit.dart';
-import '../../core/constant/color.dart';
-import '../../core/constant/routes.dart';
+import '../../utils/constant/color.dart';
+import '../../utils/constant/routes.dart';
 import '../../data/models/hospital_model.dart';
 
 class HopitalsListViewBuilder extends StatelessWidget {
@@ -23,6 +23,8 @@ class HopitalsListViewBuilder extends StatelessWidget {
         itemCount: _hospitalList.length,
         itemBuilder: (context, index) {
           return Card(
+            color: ColorManager.white,
+            elevation: 2,
             child: ListTile(
               onTap: () {
                 final HospitalsPlaceInfo? placeInfo = _hospitalList[index];
@@ -41,7 +43,7 @@ class HopitalsListViewBuilder extends StatelessWidget {
                         : ColorManager.red),
               ),
               trailing: const Icon(Icons.chevron_right),
-              leading:  const Icon(Icons.emergency),
+              leading: const Icon(Icons.emergency),
             ),
           );
         },

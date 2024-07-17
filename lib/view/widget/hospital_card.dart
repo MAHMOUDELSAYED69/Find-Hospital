@@ -1,7 +1,9 @@
-import 'package:find_hospital/core/helper/extentions.dart';
+import 'package:find_hospital/utils/helper/extentions.dart';
 import 'package:find_hospital/view/widget/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../utils/constant/color.dart';
 
 class HospitalRatingCard extends StatelessWidget {
   const HospitalRatingCard({
@@ -14,6 +16,11 @@ class HospitalRatingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: ColorManager.white,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+          side: BorderSide(
+              color: ColorManager.grey.withOpacity(0.5), width: 0.5)),
       elevation: 2,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 12.w),

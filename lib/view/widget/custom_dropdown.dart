@@ -1,6 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:find_hospital/core/cache/cache.dart';
-import 'package:find_hospital/core/helper/extentions.dart';
+import 'package:find_hospital/utils/cache/cache.dart';
+import 'package:find_hospital/utils/helper/extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

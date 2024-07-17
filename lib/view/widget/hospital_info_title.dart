@@ -1,10 +1,10 @@
 
-import 'package:find_hospital/core/helper/extentions.dart';
+import 'package:find_hospital/utils/helper/extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../bloc/hospital_cubit/find_hospital_cubit.dart';
-import '../../core/constant/color.dart';
+import '../../utils/constant/color.dart';
 
 class HospitalInfoTitle extends StatelessWidget {
   const HospitalInfoTitle({

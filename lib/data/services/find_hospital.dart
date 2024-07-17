@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
-import 'package:find_hospital/core/constant/api_url.dart';
+import 'package:find_hospital/utils/constant/api_url.dart';
 import 'package:uuid/uuid.dart';
 import '../models/hospital_model.dart';
 

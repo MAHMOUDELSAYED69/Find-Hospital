@@ -1,6 +1,6 @@
-import 'package:find_hospital/core/constant/animation.dart';
-import 'package:find_hospital/core/constant/routes.dart';
-import 'package:find_hospital/core/helper/extentions.dart';
+import 'package:find_hospital/utils/constant/animation.dart';
+import 'package:find_hospital/utils/constant/routes.dart';
+import 'package:find_hospital/utils/helper/extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';

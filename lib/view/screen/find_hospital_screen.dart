@@ -1,13 +1,13 @@
 import 'package:find_hospital/bloc/hospital_cubit/find_hospital_cubit.dart';
-import 'package:find_hospital/core/cache/cache.dart';
+import 'package:find_hospital/utils/cache/cache.dart';
 
-import 'package:find_hospital/core/helper/extentions.dart';
-import 'package:find_hospital/core/helper/scaffold_snackbar.dart';
+import 'package:find_hospital/utils/helper/extentions.dart';
+import 'package:find_hospital/utils/helper/scaffold_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
-import '../../core/constant/animation.dart';
+import '../../utils/constant/animation.dart';
 import '../../data/models/hospital_model.dart';
 import '../widget/cached_hospitals_listview.dart';
 import '../widget/custom_dropdown.dart';

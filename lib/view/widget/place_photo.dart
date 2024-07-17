@@ -1,13 +1,13 @@
 import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:find_hospital/core/constant/color.dart';
-import 'package:find_hospital/core/helper/extentions.dart';
+import 'package:find_hospital/utils/constant/color.dart';
+import 'package:find_hospital/utils/helper/extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
-import '../../core/constant/animation.dart';
-import '../../core/constant/api_url.dart';
+import '../../utils/constant/animation.dart';
+import '../../utils/constant/api_url.dart';
 
 class PlacePhotoWidget extends StatefulWidget {
   const PlacePhotoWidget({super.key, required this.photoList});

@@ -1,10 +1,10 @@
-import 'package:find_hospital/core/helper/extentions.dart';
+import 'package:find_hospital/utils/helper/extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../bloc/theme_cubit/theme_cubit.dart';
-import '../../core/constant/color.dart';
+import '../../utils/constant/color.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -20,6 +20,12 @@ class MyDrawer extends StatelessWidget {
               height: context.height / 4,
               width: context.width,
               child: Card(
+                color: ColorManager.white,
+                elevation: 3,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    side: BorderSide(
+                        color: ColorManager.grey.withOpacity(0.5), width: 0.6)),
                 child: Column(
                   children: [
                     SizedBox(height: 10.h),

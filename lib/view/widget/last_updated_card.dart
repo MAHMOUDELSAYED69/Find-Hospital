@@ -1,8 +1,8 @@
-import 'package:find_hospital/core/helper/extentions.dart';
+import 'package:find_hospital/utils/helper/extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../core/cache/cache.dart';
+import '../../utils/cache/cache.dart';
 
 class LastUpdatedCard extends StatelessWidget {
   const LastUpdatedCard({

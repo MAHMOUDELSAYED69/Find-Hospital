@@ -1,9 +1,9 @@
-import 'package:find_hospital/core/helper/extentions.dart';
+import 'package:find_hospital/utils/helper/extentions.dart';
 import 'package:flutter/material.dart';
 
 import '../../bloc/hospital_cubit/find_hospital_cubit.dart';
-import '../../core/constant/color.dart';
-import '../../core/constant/routes.dart';
+import '../../utils/constant/color.dart';
+import '../../utils/constant/routes.dart';
 import '../../data/models/hospital_model.dart';
 
 class CachedHospitalsListViewBuilder extends StatelessWidget {
@@ -42,6 +42,8 @@ class CachedHospitalsListViewBuilder extends StatelessWidget {
 
           //?---------------------------------------- hospitals data
           return Card(
+            color: ColorManager.white,
+            elevation: 2,
             child: ListTile(
               onTap: () => Navigator.pushNamed(
                 context,

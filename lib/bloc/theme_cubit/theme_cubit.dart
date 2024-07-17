@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 
-import '../../core/cache/cache.dart';
+import '../../utils/cache/cache.dart';
 
 enum ThemeState { red, green }
 
