@@ -4,17 +4,15 @@ Find Hospital is a Flutter application designed to help users locate the nearest
 ## Features
 1. **`Nearest Hospitals:`** Get a list of the nearest hospitals based on your current location.
 2. **`Hospital Details:`** View detailed information about each hospital, including:
-
-   `Name`,
-`Open Now status`,
-`Business status`,
-`Rating`,
-`Total user ratings`,
-`Distances`,
-`Duration`,
-`Phone number`,
-`Place ID`
-
+- `Name`
+- `Open Now status`
+- `Business status`
+- `Rating`,
+- `Total user ratings`
+- `Distances`
+- `Duration`
+- `Phone number`
+- `Place ID`
 3. **`Google Maps Integration:`** Open hospital locations directly in Google Maps.
 4. **`Theme Modes:`** Switch between green and red theme modes for a personalized experience.
 5. **`Data Persistence:`** The app saves the last updated hospital data for future reference.
@@ -77,61 +75,34 @@ This command checks your environment and displays a report of the status of your
 By following these steps, you'll have the Find Hospital app and running on your device, ready to Find the Hospitals around you. If you encounter any issues during installation, please refer to the Flutter documentation.
 
 ## Usage
-**`Grant Location Permissions:`** Ensure the app has permission to access your location.
-
-**`Find Hospitals:`** The app will automatically display the nearest hospitals around you.
-
-**`View Details:`** Tap on any hospital to view detailed information.
-
-**`Open in Google Maps:`** Click on the Google Maps icon to open the hospital's location in Google Maps.
-
-**`Switch Themes:`** Use the theme switcher to toggle between green and red modes.
-
-**`Save Data:`** The app automatically saves the last updated hospital data.
+- **`Grant Location Permissions:`** Ensure the app has permission to access your location.
+- **`Find Hospitals:`** The app will automatically display the nearest hospitals around you.
+- **`View Details:`** Tap on any hospital to view detailed information.
+- **`Open in Google Maps:`** Click on the Google Maps icon to open the hospital's location in Google Maps.
+- **`Switch Themes:`** Use the theme switcher to toggle between green and red modes.
+- **`Save Data:`** The app automatically saves the last updated hospital data.
 
 ## Dependencies
 This project uses the following Flutter packages:
 
 This project uses the following Flutter packages:
 
-**`bloc:`** State management library.
-
-**`cached_network_image:`** Load and cache network images.
-
-**`dio:`** HTTP client for Dart.
-
-**`dropdown_button2:`** Customizable dropdown buttons.
-
-**`flutter_bloc:`** BLoC design pattern.
-
-**`flutter_dotenv:`** Load environment variables.
-
-**`flutter_screenutil:`** Screen size adaptation.
-
-**`geolocator:`** Access device location.
-
-**`intl:`** Internationalization and localization.
-
-**`lottie:`** Render Adobe After Effects animations.
-
-**`meta:`** Dart analyzer annotations.
-
-**`shared_preferences:`** Manage application preferences.
-
-**`url_launcher:`** Launch URLs in mobile platform.
-
-**`uuid:`** Generate unique identifiers.
+- **`bloc:`** State management library.
+- **`cached_network_image:`** Load and cache network images.
+- **`dio:`** HTTP client for Dart.
+- **`dropdown_button2:`** Customizable dropdown buttons.
+- **`flutter_bloc:`** BLoC design pattern.
+- **`flutter_dotenv:`** Load environment variables.
+- **`flutter_screenutil:`** Screen size adaptation.
+- **`geolocator:`** Access device location.
+- **`intl:`** Internationalization and localization.
+- **`lottie:`** Render Adobe After Effects animations.
+- **`meta:`** Dart analyzer annotations.
+- **`shared_preferences:`** Manage application preferences.
+- **`url_launcher:`** Launch URLs in mobile platform.
+- **`uuid:`** Generate unique identifiers.
 
 Ensure these dependencies are added to your pubspec.yaml file.e.
-
-## Contributing
-Contributions are welcome! Follow these steps to contribute:
-
-Fork the repository.
-Create a new branch: git checkout -b feature/YourFeature
-Make your changes and commit them: git commit -m 'Add some feature'
-Push to the branch: git push origin feature/YourFeature
-Submit a pull request.
 
 ## License
 
@@ -139,7 +110,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 
 ## Contact
-If you have any questions or suggestions, feel free to reach out:
 
-Email: [gcfjxvkj@gmail.com]         
-GitHub: [[MAHMOUDELSAYED69](https://github.com/MAHMOUDELSAYED69)]
+For any questions or feedback, please reach out via email: [gcfjxvkj@gmail.com](gcfjxvkj@gmail.com)
